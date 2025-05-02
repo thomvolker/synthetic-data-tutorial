@@ -1,13 +1,12 @@
 ---
-title: "Welcome to the TOPIC Tutorial!"
+title: "Welcome to the synthetic data tutorial!"
 ---
-
-THIS IS YOUR HOME PAGE FILE. DO NOT RENAME OR DELETE THIS FILE.
-
 
 # Tutorial Overview
 
-This **self-paced tutorial** is intended to take X hours to complete.
+This **self-paced tutorial** will introduce you to the generation and evaluation of synthetic data. Synthetic data is generated data that can be used as an alternative to privacy-sensitive data, for example to enhance open science practices. The tutorial is intended to take approximately 4 hours to complete.
+
+<!-- TODO: -->
 
 The tutorial is split into the following sections:
 
@@ -18,6 +17,11 @@ The tutorial is split into the following sections:
 ::: {.callout-tip title="Recommended Software"}
 This tutorial assumes you have the following software installed:
 
--   SOME SOFTWARE + LINK HERE
+- A recent version of [R (>= 4.1.0)](https://cran.r-project.org/)
+- [RStudio](https://posit.co/downloads/)
+
+Also, the tutorial requires the following `R` packages:
+
+- [`synthpop`](https://synthpop.org.uk/get-started.html)
 
 :::
