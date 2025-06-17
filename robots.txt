@@ -1,1 +1,1 @@
-Sitemap: https://thomvolker.github.io/SyntheticDataTutorial/sitemap.xml
+Sitemap: https://thomvolker.github.io/synthetic-data-tutorial/sitemap.xml

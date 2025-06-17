@@ -2,12 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.31">
+<meta name="generator" content="quarto-1.7.32">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Thom Benjamin Volker">
 
-<title>Page Title Here – TUTORIAL TITLE HERE</title>
+<title>Statistical disclosure control – TUTORIAL TITLE HERE</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +31,6 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../TOPIC2/page1.html" rel="next">
-<link href="../TOPIC1/page1.html" rel="prev">
 <link href="../assets/LMU_OSC_favicon.jpg" rel="icon" type="image/jpeg">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -39,7 +38,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap-dcdba469581b8239f1fd1392a538f1ba.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
@@ -129,7 +128,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../TOPIC1/page1.html">TOPIC 1</a></li><li class="breadcrumb-item"><a href="../TOPIC1/page2.html">TOPIC1 Page2 Title</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Statistical disclosure control</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -166,13 +165,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../TOPIC1/page1.html" class="sidebar-item-text sidebar-link">
+  <a href="../TOPIC1/page1.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">TOPIC1 Page1 Title</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../TOPIC1/page2.html" class="sidebar-item-text sidebar-link active">
+  <a href="../TOPIC1/page2.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">TOPIC1 Page2 Title</span></a>
   </div>
 </li>
@@ -219,7 +218,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#level-one-header" id="toc-level-one-header" class="nav-link active" data-scroll-target="#level-one-header">Level One Header</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#level-one-header" id="toc-level-one-header" class="nav-link" data-scroll-target="#level-one-header">Level One Header</a>
   <ul class="collapse">
   <li><a href="#level-two" id="toc-level-two" class="nav-link" data-scroll-target="#level-two">Level Two</a>
   <ul class="collapse">
@@ -234,20 +234,26 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#level-two-1" id="toc-level-two-1" class="nav-link" data-scroll-target="#level-two-1">Level Two</a></li>
   </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/REPO-NAME-HERE/edit/main/TOPIC1/page2.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/REPO-NAME-HERE/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/REPO-NAME-HERE/edit/main/sdc/page1.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/REPO-NAME-HERE/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../TOPIC1/page1.html">TOPIC 1</a></li><li class="breadcrumb-item"><a href="../TOPIC1/page2.html">TOPIC1 Page2 Title</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Page Title Here</h1>
+<h1 class="title">Statistical disclosure control</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Thom Benjamin Volker </p>
+          </div>
+  </div>
     
   
     
@@ -258,7 +264,14 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>The headers below cause the table of contents/dropdown on the right to be visible.</p>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>Collected research data often contains sensitive information about individuals. For example, social scientists might collect data on income or criminal behavior, and health data might contain sensitive information about patients. Such private information may harm individuals if disclosed to the public. Even if no harm is incurred, the trust of individuals in the data collector, or scientific institutions in general, may be damaged if such data is revealed. At the same time, collected data is very valuable to researchers and governmental institutions alike. Using previously collected data, researchers may answer novel research questions and governmental institutions may improve policy. In addition to these high-level applications, open data can also be used to evaluate the reproducibility of research projects or serve as realistic data in education. That is, open data is valuable for many applications, but simply releasing the data is often not an option.</p>
+<p>The first step in the process of releasing data is to anonymize it [TODO: see Data Anonymization tutorial]. Anonymization requires that potentially identifying information is removed from the collected data (e.g., names, addresses, IP-addresses). After de-identifying the data, your data might still contain information that can lead to indirect identification of individuals, for example because the data can be linked to external data sources. Especially in today’s age of massive data collection, data sources can be linked in surprising ways. For example, in 2006, researchers from the University of Texas were able to uncover the identity of Netflix users by linking Netflix movie reviews to the IMDB database. To prevent such indirect identification, statistical disclosure control can be applied to the data.</p>
+<p>The goal of statistical disclosure control is to release a dataset that is as similar as possible to the original data, while at the same time ensuring that no individual can be identified from the released data, nor any sensitive information can be inferred [@]. Several techniques exist to achieve this goal, including masking, swapping, noise addition and rounding. However, without taking these alterations into account, relationships between variables in the data may be distorted, limiting their usefulness. In this tutorial, we focus ourselves on the generation of synthetic data as a means of statistical disclosure control.</p>
+<p>The idea of synthetic data is that the observed values are replaced by values that are generated from a model. This model is fitted to the observed data, and generated values are drawn from this fitted model. Thus, the amount of information contained in the synthetic data is limited to the information contained in the synthesis model.</p>
+<p>Depending on the model used, the protection against disclosure can be very strong. , which limits disclosure risks while preserving relationships between variables. Thus, as far as the relationships between variables are modelled correctly, synthetic data yields valid inferences.</p>
+</section>
 <section id="level-one-header" class="level1">
 <h1>Level One Header</h1>
 <section id="level-two" class="level2">
@@ -359,7 +372,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/thomvolker\.github\.io\/SyntheticDataTutorial\/");
+        var filterRegex = new RegExp("https:\/\/thomvolker\.github\.io\/synthetic-data-tutorial\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -686,18 +699,6 @@ ul.task-list li input[type="checkbox"] {
     }
   });
   </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
-      <a href="../TOPIC1/page1.html" class="pagination-link" aria-label="TOPIC1 Page1 Title">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">TOPIC1 Page1 Title</span>
-      </a>          
-  </div>
-  <div class="nav-page nav-page-next">
-      <a href="../TOPIC2/page1.html" class="pagination-link" aria-label="TOPIC2 Page1 Title">
-        <span class="nav-page-text">TOPIC2 Page1 Title</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
-  </div>
-</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -706,7 +707,7 @@ ul.task-list li input[type="checkbox"] {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright, 2024 Open Science Center at LMU Munich</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/lmu-osc/REPO-NAME-HERE/edit/main/TOPIC1/page2.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/REPO-NAME-HERE/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/lmu-osc/REPO-NAME-HERE/edit/main/sdc/page1.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/REPO-NAME-HERE/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
