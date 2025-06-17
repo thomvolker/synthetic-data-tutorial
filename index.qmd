@@ -6,12 +6,11 @@ title: "Welcome to the synthetic data tutorial!"
 
 This **self-paced tutorial** will introduce you to the generation and evaluation of synthetic data. Synthetic data is generated data that can be used as an alternative to privacy-sensitive data, for example to enhance open science practices. The tutorial is intended to take approximately 4 hours to complete.
 
-<!-- TODO: -->
-
 The tutorial is split into the following sections:
 
-1.  [**TOPIC1**]() talks about TOPIC1
-2.  [**TOPIC2**]() discusses TOPIC2
+1.  [Statistical Disclosure Control](sdc/page1) provides a very brief introduction to statistical disclosure control.
+2.  [Generating synthetic data](gensynth/page1) introduces the idea of synthetic data and outlines how it can be generated in `R`.
+3.  [Evaluating synthetic data quality](syntheval/page1) addresses the privacy-utility trade-off, and discusses how the quality of synthetic data can be evaluated from both sides of this trade-off.
 
 
 ::: {.callout-tip title="Recommended Software"}
