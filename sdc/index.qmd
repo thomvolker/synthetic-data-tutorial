@@ -1,0 +1,69 @@
+---
+title: "Statistical disclosure control"
+author: "Thom Benjamin Volker"
+bibliography: ../references.bib
+---
+
+# Introduction
+
+Collected research data often contains sensitive information about individuals. 
+For example, social scientists might collect data on income or criminal behavior, and health data often contains medical information of individuals.
+Such private information may harm the people involved if disclosed to the public.
+Even if no harm is incurred, the trust of individuals in the data collector, or scientific institutions in general, may be damaged if such data is revealed.
+At the same time, broad data availability is very valuable to researchers and governmental institutions alike.
+Using previously collected data, researchers may answer novel research questions and governmental institutions may improve policy. 
+In addition to these high-level applications, open data can also be used to evaluate the reproducibility of research projects or serve as realistic data in education.
+That is, open data is valuable for many applications, but simply releasing the data is often not an option.
+
+The first step in the process of releasing data is to anonymize it [TODO: see Data Anonymization tutorial]. 
+Anonymization requires that potentially identifying information is removed from the collected data.
+Examples of such identifying information are names, addresses, IP-addresses, that can often be removed without losing important information.
+However, after de-identifying the data, your data might still contain information that can lead to indirect identification of individuals, for example because the data can be linked to external data sources.
+Especially in today's age of massive data collection, data sources can be linked in surprising ways.
+For example, in 2006, researchers from the University of Texas were able to uncover the identity of Netflix users by linking Netflix movie reviews to the IMDB database.
+This might not be a problem for most users, but for some it would yield a high risk of disclosing their sexual orientation. 
+To prevent indirect identification, statistical disclosure control can be applied to the data.
+
+The goal of statistical disclosure control is to release a data set that is as similar as possible to the original data, while at the same time ensuring that no individual can be identified from the released data, nor any sensitive information can be inferred [@hundepool2024].
+Disclosure is here defined as the release of information about an individual that would not have become public if the data would be kept private. 
+Similarity, in this context, means that the protected and released data can be used for the same purposes as the original data, and yields similar results. 
+Similarity does not mean that the released records are similar to the original records, but rather that over the whole, the distribution of the observed and released data is similar.
+Statistical disclosure control often yields a trade-off between privacy and utility: the stricter the data protection, the better the privacy of respondents is protected, but the more information is lost, and the lower the utility of the data.
+The level of protection required depends on the data at hand: experimental data on, for example, people's behavior in a social dilemma game may require very little protection, while questionnaire data on unethical behavior should typically be well-protected.
+At the same time, the level of utility required depends on the problem at hand: if the released data should allow to replicate complex analyses to a reasonable degree of accuracy, more sophisticated disclosure methods are required than when solely some marginal quantities (e.g., means and standard deviations) should be preserved.
+Note that the privacy-utility trade-off is very much relative: a released data set can be very useful for some purposes, but almost useless for others. 
+
+
+```{r}
+#| label: fig-privacy-utility
+#| fig-cap: "The privacy-utility trade-off: one can typically attain either high privacy or high utility, but not both at the same time. Typically, there can be substantial utility of the synthetic data, but some privacy risk will remain."
+#| echo: false
+#| message: false
+#| warning: false
+library(ggplot2)
+
+ggplot(data = data.frame(
+  x = c(0.01, 0.95, 0.95, 0.5),
+  y = c(-0.05, -1, -0.05, -0.5),
+  label = c("No data", "Original data", "Probably unattainable\noptimal release", "Typical release")
+), mapping = aes(x = x, y = y, label = label)) +
+  stat_function(aes(col = "Theoretical boundary"), fun = \(x) -x^2, linewidth = 1) +
+  xlim(0, 1) +
+  theme_classic() +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        legend.position = "inside",
+        legend.position.inside = c(0.15, 1.02),
+        legend.title = element_blank(),
+        legend.background = element_blank()) +
+  xlab("Utility") +
+  ylab("Privacy") +
+  geom_point() +
+  geom_text(aes(hjust = c(-0.1, 1.1, 1.1, 1.1))) +
+  scale_color_manual(values = c("#009933")) +
+  ggtitle("The privacy-utility trade-off for disclosure risk protected data\n")
+```
+
+
+Over the years, several statistical disclosure methods have been developed. 
+
