@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Thom Benjamin Volker">
 
-<title>Page Title Here – TUTORIAL TITLE HERE</title>
+<title>Statistical disclosure control – Generating and evaluating synthetic data in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,7 +21,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -82,7 +103,7 @@ ul.task-list li input[type="checkbox"] {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">TUTORIAL TITLE HERE</span>
+    <span class="navbar-title">Generating and evaluating synthetic data in R</span>
     </a>
   </div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
@@ -127,7 +148,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Page Title Here</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Statistical disclosure control</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -153,58 +174,24 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Overview</span></a>
   </div>
 </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">TOPIC 1</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../TOPIC1/page1.qmd" class="sidebar-item-text sidebar-link">
- <span class="menu-text">TOPIC1 Page1 Title</span></a>
+  <a href="../sdc/" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Statistical disclosure control</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../TOPIC1/page2.qmd" class="sidebar-item-text sidebar-link">
- <span class="menu-text">TOPIC1 Page2 Title</span></a>
+  <a href="../generation/" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Generating synthetic data</span></a>
   </div>
 </li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">TOPIC 2</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../TOPIC2/page1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">TOPIC2 Page1 Title</span></a>
+  <a href="../evaluation/" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Evaluating synthetic data quality</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../TOPIC2/page2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">TOPIC2 Page2 Title</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../TOPIC2/page3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">TOPIC2 Page3 Title</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
     </ul>
     </div>
 </nav>
@@ -217,35 +204,30 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#level-one-header" id="toc-level-one-header" class="nav-link active" data-scroll-target="#level-one-header">Level One Header</a>
-  <ul class="collapse">
-  <li><a href="#level-two" id="toc-level-two" class="nav-link" data-scroll-target="#level-two">Level Two</a>
-  <ul class="collapse">
-  <li><a href="#l3" id="toc-l3" class="nav-link" data-scroll-target="#l3">L3</a></li>
-  <li><a href="#l3-again" id="toc-l3-again" class="nav-link" data-scroll-target="#l3-again">L3 Again</a></li>
-  <li><a href="#and-one-more-time" id="toc-and-one-more-time" class="nav-link" data-scroll-target="#and-one-more-time">And one more time</a></li>
-  </ul></li>
-  <li><a href="#another-level-two" id="toc-another-level-two" class="nav-link" data-scroll-target="#another-level-two">Another Level Two</a></li>
-  </ul></li>
-  <li><a href="#level-one-again" id="toc-level-one-again" class="nav-link" data-scroll-target="#level-one-again">Level One Again</a>
-  <ul class="collapse">
-  <li><a href="#level-two-1" id="toc-level-two-1" class="nav-link" data-scroll-target="#level-two-1">Level Two</a></li>
-  </ul></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#statistical-disclosure-control" id="toc-statistical-disclosure-control" class="nav-link" data-scroll-target="#statistical-disclosure-control">Statistical disclosure control</a></li>
+  <li><a href="#conventional-statistical-disclosure-control-methods" id="toc-conventional-statistical-disclosure-control-methods" class="nav-link" data-scroll-target="#conventional-statistical-disclosure-control-methods">Conventional statistical disclosure control methods</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/REPO-NAME-HERE/edit/main/sdc/page2.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/REPO-NAME-HERE/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/REPO-NAME-HERE/edit/main/sdc/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/REPO-NAME-HERE/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Page Title Here</h1>
+<h1 class="title">Statistical disclosure control</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Thom Benjamin Volker </p>
+          </div>
+  </div>
     
   
     
@@ -256,35 +238,56 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>The headers below cause the table of contents/dropdown on the right to be visible.</p>
-<section id="level-one-header" class="level1">
-<h1>Level One Header</h1>
-<section id="level-two" class="level2">
-<h2 class="anchored" data-anchor-id="level-two">Level Two</h2>
-<section id="l3" class="level3">
-<h3 class="anchored" data-anchor-id="l3">L3</h3>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>Collected research data often contains sensitive information about individuals. For example, social scientists might collect data on income or criminal behavior, and health data often contains medical information of individuals. Such private information may harm the people involved if disclosed to the public. Even if no harm is incurred, the trust of individuals in the data collector, or scientific institutions in general, may be damaged if such data is revealed. At the same time, broad data availability is very valuable to researchers and governmental institutions alike. Using previously collected data, researchers may answer novel research questions and governmental institutions may improve policy. In addition to these high-level applications, open data can also be used to evaluate the reproducibility of research projects or serve as realistic data in education. That is, open data is valuable for many applications, but simply releasing the data is often not an option.</p>
+<p>The first step in the process of releasing data is to anonymize it [TODO: see Data Anonymization tutorial]. Anonymization requires that potentially identifying information is removed from the collected data. Examples of such identifying information are names, addresses, IP-addresses, that can often be removed without losing important information. However, after de-identifying the data, your data might still contain information that can lead to indirect identification of individuals, for example because the data can be linked to external data sources. Especially in today’s age of massive data collection, data sources can be linked in surprising ways. For example, in 2006, researchers from the University of Texas were able to uncover the identity of Netflix users by linking Netflix movie reviews to the IMDB database. This might not be a problem for most users, but for some it would yield a high risk of disclosing their sexual orientation. To prevent indirect identification, statistical disclosure control can be applied to the data.</p>
 </section>
-<section id="l3-again" class="level3">
-<h3 class="anchored" data-anchor-id="l3-again">L3 Again</h3>
+<section id="statistical-disclosure-control" class="level1">
+<h1>Statistical disclosure control</h1>
+<p>The goal of statistical disclosure control is to release a data set that is as similar as possible to the original data, while at the same time ensuring that no individual can be identified from the released data, nor any sensitive information can be inferred <span class="citation" data-cites="hundepool2024">(<a href="#ref-hundepool2024" role="doc-biblioref">Hundepool et al. 2024</a>)</span>. Disclosure is here defined as the release of information about an individual that would not have become public if the data would be kept private. Two types of disclosure risk are commonly considered. First, re-identification disclosure concerns when individuals can be singled out from the released data, resulting in confidential data being leaked. Second, attribute disclosure occurs when some characteristic of an individual can be learned with (near) certainty from the data release. For example, if a release discloses that all inhabitants of a street in some city are on welfare, knowing that a person lives in this street discloses information on their welfare status. Every data release requires that these types of disclosure risk are sufficiently small.</p>
+<p>At the same time, the goal of a data release is to allow others to do something useful with the released data, and for this purpose, the released data should be similar to the original data. Similarity, in this context, means that the released, but protected, data can be used for the same purposes as the original data. To a reasonable degree, analyses on the released data should yield results similar to results obtained from the original data. Similarity does not mean that the released records are similar to the original records, but rather that over the whole, the distribution of the observed and released data is similar. Statistical disclosure control often yields a trade-off between privacy and utility: the stricter the data protection, the better the privacy of respondents is protected, but the more information is lost, and the lower the utility of the data. The level of protection required depends on the data at hand: data from an insensitive experiment with only very general personal information may require very little protection, while an extensive survey on criminal behavior or sensitive issues should typically be well-protected. At the same time, the level of utility required depends on the problem at hand: if the released data should allow to replicate complex analyses to a reasonable degree of accuracy, more sophisticated disclosure methods are required than when solely some marginal quantities (e.g., means and standard deviations) should be preserved. Note that the privacy-utility trade-off is very much relative: a released data set can be very useful for some purposes, but almost useless for others.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-privacy-utility" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-privacy-utility-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-privacy-utility-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-privacy-utility-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: The privacy-utility trade-off: one can typically attain either high privacy or high utility, but not both at the same time. Typically, there can be substantial utility of the synthetic data, but some privacy risk will remain.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
-<section id="and-one-more-time" class="level3">
-<h3 class="anchored" data-anchor-id="and-one-more-time">And one more time</h3>
-</section>
-</section>
-<section id="another-level-two" class="level2">
-<h2 class="anchored" data-anchor-id="another-level-two">Another Level Two</h2>
-</section>
-</section>
-<section id="level-one-again" class="level1">
-<h1>Level One Again</h1>
-<section id="level-two-1" class="level2">
-<h2 class="anchored" data-anchor-id="level-two-1">Level Two</h2>
+<section id="conventional-statistical-disclosure-control-methods" class="level1">
+<h1>Conventional statistical disclosure control methods</h1>
+<p>In practice, many techniques for statistical disclosure control for microdata (that is, data on individual observations, potentially measured at multiple locations, in contrast to tables with aggregated data) have been developed over the years. Typically, these techniques introduce both bias and variance to the data to limit disclosure <span class="citation" data-cites="fienberg_slavkovic_2011">(<a href="#ref-fienberg_slavkovic_2011" role="doc-biblioref">Fienberg and Slavković 2011</a>)</span>. Common methods that have traditionally been used for statistical disclosure control are:</p>
+<ul>
+<li><strong>TODO: ADD REFERENCES</strong></li>
+<li>Aggregation: collapsing categories into larger overarching categories (e.g., towns into municipalities or regions, divisions into companies).</li>
+<li>Rounding: replacing original values with their rounded counterpart (e.g., income in thousands of euros, age in years).</li>
+<li>Top coding: cap all values higher or lower than some threshold to this threshold (sometimes, only relatively extreme values, such as very large income values, yield a high risk of disclosure).</li>
+<li>Microaggregation: combine observations into groups of some size where people within a group are maximally similar, calculate the group mean for each variable used to form groups, and replace values on these variables by the respective group mean.</li>
+<li>Suppression: remove sensitive or identifying values from the released data directly (this can even be an entire variable).</li>
+<li>Adding noise: random noise is added to the observed values, such that the released value is different from the underlying observed value.</li>
+</ul>
+<p>While it is possible for the above approaches to take relationships between variables into account, this is not so common. While these approaches can do a reasonable job in protecting disclosure, they also typically distort data quality tremendously. These approaches are often applied on a variably by variable basis, distorting relationships between variables. Synthetic data is one way to deal with this, as it attempts to model the joint distribution of the variables in the data, and thus allows to capture relationships between variables (at least theoretically). The idea of synthetic data will be more thoroughly explained in <a href="../synthetic/">the subsequent section</a>.</p>
 
 
-</section>
+
 </section>
 
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-fienberg_slavkovic_2011" class="csl-entry" role="listitem">
+Fienberg, Stephen E., and Aleksandra B. Slavković. 2011. <span>“Data Privacy and Confidentiality.”</span> In <em>International Encyclopedia of Statistical Science</em>, edited by Miodrag Lovric, 342–45. Berlin, Heidelberg: Springer Berlin Heidelberg. <a href="https://doi.org/10.1007/978-3-642-04898-2_202">https://doi.org/10.1007/978-3-642-04898-2_202</a>.
+</div>
+<div id="ref-hundepool2024" class="csl-entry" role="listitem">
+Hundepool, Anco, Josep Domingo-Ferrer, Luisa Franconi, Sarah Giessing, Rainer Lenz, Jane Naylor, Eric Schulte Nordholt, et al. 2024. <em>Handbook on Statistical Disclosure Control</em>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -692,7 +695,7 @@ ul.task-list li input[type="checkbox"] {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright, 2024 Open Science Center at LMU Munich</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/lmu-osc/REPO-NAME-HERE/edit/main/sdc/page2.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/REPO-NAME-HERE/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/lmu-osc/REPO-NAME-HERE/edit/main/sdc/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/REPO-NAME-HERE/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

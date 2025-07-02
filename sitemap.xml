@@ -1,39 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://thomvolker.github.io/synthetic-data-tutorial/LICENSE.html</loc>
-    <lastmod>2025-06-29T23:12:59.541Z</lastmod>
+    <loc>https://thomvolker.github.io/synthetic-data-tutorial/synthetic/index.html</loc>
+    <lastmod>2025-07-02T19:46:57.368Z</lastmod>
   </url>
   <url>
-    <loc>https://thomvolker.github.io/synthetic-data-tutorial/index.html</loc>
-    <lastmod>2025-06-29T23:12:59.542Z</lastmod>
-  </url>
-  <url>
-    <loc>https://thomvolker.github.io/synthetic-data-tutorial/sdc/page1.html</loc>
-    <lastmod>2025-06-29T23:12:59.542Z</lastmod>
-  </url>
-  <url>
-    <loc>https://thomvolker.github.io/synthetic-data-tutorial/TOPIC2/page3.html</loc>
-    <lastmod>2025-06-29T23:12:59.541Z</lastmod>
-  </url>
-  <url>
-    <loc>https://thomvolker.github.io/synthetic-data-tutorial/TOPIC2/page2.html</loc>
-    <lastmod>2025-06-29T23:12:59.541Z</lastmod>
-  </url>
-  <url>
-    <loc>https://thomvolker.github.io/synthetic-data-tutorial/TOPIC2/page1.html</loc>
-    <lastmod>2025-06-29T23:12:59.541Z</lastmod>
-  </url>
-  <url>
-    <loc>https://thomvolker.github.io/synthetic-data-tutorial/sdc/page2.html</loc>
-    <lastmod>2025-06-29T23:12:59.542Z</lastmod>
-  </url>
-  <url>
-    <loc>https://thomvolker.github.io/synthetic-data-tutorial/LICENSE-CODE.html</loc>
-    <lastmod>2025-06-29T23:12:59.541Z</lastmod>
+    <loc>https://thomvolker.github.io/synthetic-data-tutorial/generation/index.html</loc>
+    <lastmod>2025-07-02T19:46:57.368Z</lastmod>
   </url>
   <url>
     <loc>https://thomvolker.github.io/synthetic-data-tutorial/about.html</loc>
-    <lastmod>2025-06-29T23:12:59.541Z</lastmod>
+    <lastmod>2025-07-02T19:46:57.367Z</lastmod>
+  </url>
+  <url>
+    <loc>https://thomvolker.github.io/synthetic-data-tutorial/LICENSE-CODE.html</loc>
+    <lastmod>2025-07-02T19:46:57.367Z</lastmod>
+  </url>
+  <url>
+    <loc>https://thomvolker.github.io/synthetic-data-tutorial/sdc/index.html</loc>
+    <lastmod>2025-07-02T19:46:57.368Z</lastmod>
+  </url>
+  <url>
+    <loc>https://thomvolker.github.io/synthetic-data-tutorial/index.html</loc>
+    <lastmod>2025-07-02T19:46:57.368Z</lastmod>
+  </url>
+  <url>
+    <loc>https://thomvolker.github.io/synthetic-data-tutorial/evaluation/index.html</loc>
+    <lastmod>2025-07-02T19:46:57.368Z</lastmod>
+  </url>
+  <url>
+    <loc>https://thomvolker.github.io/synthetic-data-tutorial/LICENSE.html</loc>
+    <lastmod>2025-07-02T19:46:57.367Z</lastmod>
   </url>
 </urlset>
