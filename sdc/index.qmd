@@ -24,12 +24,22 @@ For example, in 2006, researchers from the University of Texas were able to unco
 This might not be a problem for most users, but for some it would yield a high risk of disclosing their sexual orientation. 
 To prevent indirect identification, statistical disclosure control can be applied to the data.
 
+# Statistical disclosure control 
+
 The goal of statistical disclosure control is to release a data set that is as similar as possible to the original data, while at the same time ensuring that no individual can be identified from the released data, nor any sensitive information can be inferred [@hundepool2024].
 Disclosure is here defined as the release of information about an individual that would not have become public if the data would be kept private. 
-Similarity, in this context, means that the protected and released data can be used for the same purposes as the original data, and yields similar results. 
+Two types of disclosure risk are commonly considered.
+First, re-identification disclosure concerns when individuals can be singled out from the released data, resulting in confidential data being leaked. 
+Second, attribute disclosure occurs when some characteristic of an individual can be learned with (near) certainty from the data release. 
+For example, if a release discloses that all inhabitants of a street in some city are on welfare, knowing that a person lives in this street discloses information on their welfare status.
+Every data release requires that these types of disclosure risk are sufficiently small.
+
+At the same time, the goal of a data release is to allow others to do something useful with the released data, and for this purpose, the released data should be similar to the original data.
+Similarity, in this context, means that the released, but protected, data can be used for the same purposes as the original data.
+To a reasonable degree, analyses on the released data should yield results similar to results obtained from the original data.
 Similarity does not mean that the released records are similar to the original records, but rather that over the whole, the distribution of the observed and released data is similar.
 Statistical disclosure control often yields a trade-off between privacy and utility: the stricter the data protection, the better the privacy of respondents is protected, but the more information is lost, and the lower the utility of the data.
-The level of protection required depends on the data at hand: experimental data on, for example, people's behavior in a social dilemma game may require very little protection, while questionnaire data on unethical behavior should typically be well-protected.
+The level of protection required depends on the data at hand: data from an insensitive experiment with only very general personal information may require very little protection, while an extensive survey on criminal behavior or sensitive issues should typically be well-protected.
 At the same time, the level of utility required depends on the problem at hand: if the released data should allow to replicate complex analyses to a reasonable degree of accuracy, more sophisticated disclosure methods are required than when solely some marginal quantities (e.g., means and standard deviations) should be preserved.
 Note that the privacy-utility trade-off is very much relative: a released data set can be very useful for some purposes, but almost useless for others. 
 
@@ -43,7 +53,7 @@ Note that the privacy-utility trade-off is very much relative: a released data s
 library(ggplot2)
 
 ggplot(data = data.frame(
-  x = c(0.01, 0.95, 0.95, 0.5),
+  x = c(0.01, 0.95, 0.95, 0.25),
   y = c(-0.05, -1, -0.05, -0.5),
   label = c("No data", "Original data", "Probably unattainable\noptimal release", "Typical release")
 ), mapping = aes(x = x, y = y, label = label)) +
@@ -65,5 +75,23 @@ ggplot(data = data.frame(
 ```
 
 
-Over the years, several statistical disclosure methods have been developed. 
 
+# Conventional statistical disclosure control methods
+
+In practice, many techniques for statistical disclosure control for microdata (that is, data on individual observations, potentially measured at multiple locations, in contrast to tables with aggregated data) have been developed over the years.
+Typically, these techniques introduce both bias and variance to the data to limit disclosure [@fienberg_slavkovic_2011].
+Common methods that have traditionally been used for statistical disclosure control are: 
+
+- **TODO: ADD REFERENCES**
+- Aggregation: collapsing categories into larger overarching categories (e.g., towns into municipalities or regions, divisions into companies).
+- Rounding: replacing original values with their rounded counterpart (e.g., income in thousands of euros, age in years).
+- Top coding: cap all values higher or lower than some threshold to this threshold (sometimes, only relatively extreme values, such as very large income values, yield a high risk of disclosure).
+- Microaggregation: combine observations into groups of some size where people within a group are maximally similar, calculate the group mean for each variable used to form groups, and replace values on these variables by the respective group mean. 
+- Suppression: remove sensitive or identifying values from the released data directly (this can even be an entire variable). 
+- Adding noise: random noise is added to the observed values, such that the released value is different from the underlying observed value.
+
+While it is possible for the above approaches to take relationships between variables into account, this is not so common. 
+While these approaches can do a reasonable job in protecting disclosure, they also typically distort data quality tremendously.
+These approaches are often applied on a variably by variable basis, distorting relationships between variables.
+Synthetic data is one way to deal with this, as it attempts to model the joint distribution of the variables in the data, and thus allows to capture relationships between variables (at least theoretically). 
+The idea of synthetic data will be more thorougly explained in [the subsequent section](../generation/).
