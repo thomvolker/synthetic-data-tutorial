@@ -94,4 +94,4 @@ While it is possible for the above approaches to take relationships between vari
 While these approaches can do a reasonable job in protecting disclosure, they also typically distort data quality tremendously.
 These approaches are often applied on a variably by variable basis, distorting relationships between variables.
 Synthetic data is one way to deal with this, as it attempts to model the joint distribution of the variables in the data, and thus allows to capture relationships between variables (at least theoretically). 
-The idea of synthetic data will be more thorougly explained in [the subsequent section](../generation/).
+The idea of synthetic data will be more thoroughly explained in [the subsequent section](../synthetic/).
