@@ -80,7 +80,7 @@ ggplot(data = data.frame(
 
 In practice, many techniques for statistical disclosure control for microdata (that is, data on individual observations, potentially measured at multiple locations, in contrast to tables with aggregated data) have been developed over the years.
 Typically, these techniques introduce both bias and variance to the data to limit disclosure [@fienberg_slavkovic_2011].
-Common methods that have traditionally been used for statistical disclosure control are: 
+Common methods that have traditionally been used for statistical disclosure control are [e.g., @reiter_2011; @hundepool2024]: 
 
 - **TODO: ADD REFERENCES**
 - Aggregation: collapsing categories into larger overarching categories (e.g., towns into municipalities or regions, divisions into companies).
