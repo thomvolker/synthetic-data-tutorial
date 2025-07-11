@@ -1,15 +1,15 @@
 # Begin Project
 project:
   type: website
-  pre-render: wget -nc https://raw.githubusercontent.com/lmu-osc/branding-resources/refs/heads/main/lmu-osc-custom.scss
+  pre-render: wget -nc https://raw.githubusercontent.com/lmu-osc/branding-resources/refs/heads/main/lmu-osc-custom.scss --no-check-certificate
   post-render: rm lmu-osc-custom.scss
 # End Project
 
 
 # Begin Website
 website:
-  title: "TUTORIAL TITLE HERE"
-  page-footer: 
+  title: "Generating and evaluating synthetic data in R"
+  page-footer:
     center: "Copyright, 2024 Open Science Center at LMU Munich"
     border: false
   search:
@@ -21,10 +21,10 @@ website:
   favicon: assets/LMU_OSC_favicon.jpg
   margin-header: |
     ![](/assets/LMU_OSC_logo.svg){width="175"}
-  
-  
+
+
   navbar:
-    right: 
+    right:
       - about.qmd
     left:
       - href: index.qmd
@@ -38,37 +38,29 @@ website:
             url:  https://github.com/lmu-osc/REPO-NAME-HERE/issues
       - icon: house-heart
         url: https://www.osc.uni-muenchen.de/index.html
-   
-        
+
+
   sidebar:
     style: "docked"
     contents:
       - text: "Overview"
         href: index.qmd
-      - section: "TOPIC 1"
-        contents:
-          - href: TOPIC1/page1.qmd
-            text: "TOPIC1 Page1 Title"
-          - href: TOPIC1/page2.qmd
-            text: "TOPIC1 Page2 Title"
-      - section: "TOPIC 2"
-        contents:
-          - href: TOPIC2/page1.qmd
-            text: "TOPIC2 Page1 Title"
-          - href: TOPIC2/page2.qmd
-            text: "TOPIC2 Page2 Title"
-          - href: TOPIC2/page3.qmd
-            text: "TOPIC2 Page3 Title"
+      - text: "Statistical disclosure control"
+        href: sdc/
+      - text: "Generating synthetic data"
+        href: generation/
+      - text: "Evaluating synthetic data quality"
+        href: evaluation/
 # End Website
 
 
 # Begin Format
 format:
   html:
-    theme: 
+    theme:
       - cosmo
       - lmu-osc-custom.scss
-    css: 
+    css:
       - https://raw.githubusercontent.com/lmu-osc/branding-resources/refs/heads/main/lmu-osc-styles.css
     toc: true
     fontsize: 13pt

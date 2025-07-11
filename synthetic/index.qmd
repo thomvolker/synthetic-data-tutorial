@@ -1,0 +1,54 @@
+---
+title: "Synthetic data: The general idea"
+author: Thom Benjamin Volker
+format: html
+---
+
+# Synthetic data: What it is and what it is about?
+
+The idea of synthetic data has first been proposed independently by Donald B. Rubin and Roderick J.A. Little, who you may know as members of the founding fathers of modern missing data theory in 1993 [@rubin; @little].
+Both proposed, albeit in slightly different ways, to not release the original data, but replace values from the original data with values drawn from some model.
+That is, synthetic data is nothing more than *generated* data, and is occasionally called *simulated data*, *digital twins* or even *fake* data.
+This model can be specified independent of the data at hand, but typically it is estimated on a data set.
+Moreover, the model can range from very simple (e.g., a set of values with attached probabilities) to extremely complex (e.g., a neural network with billions of parameters).
+Whatever model is used, it is important that new samples can be generated from it.
+
+In what follows, we assume that there is a observed data set, $X$, consisting of $n$ observations measured on $p$ variables.
+Furthermore, we assume that these observations adhere to some structure that we can encode in the joint distribution of the variables, $f(X)$.
+If we would know this distribution, we could sample new observations from it directly, but we typically do not know this.
+However, we can estimate this joint distribution, leading to $\hat{f}(X)$, and sample new observations from this.
+
+# The synthetic data model
+
+How to estimate this joint distribution is essentially a question of how to specify the synthetic data model.
+If our model approximates the true data generating process reasonably well, we can expect fairly high quality synthetic data. 
+To be a bit more precise, this means that both univariate and multivariate patterns of the observed data are preserved in the synthetic data: the univariate characteristics of the variables are thus preserved, but also relationships between variables are captured in the synthetic data. 
+Moreover, if we model $p(X)$ accurately and draw new samples from this model, our data should be protected sufficiently well, because the newly sampled synthetic observations are independent of the observed data.
+
+
+This can go wrong in two different ways. 
+First, it can be that our model of $p(X)$ is far from accurate, because it misses important aspects of the underlying distribution. 
+For example, we might select a model that does not capture the shape of some variables. 
+Or we could miss some important relationships between variables. 
+In such cases, the synthetic data might not look like the observed data, and some analyses performed on the synthetic data might yield results that are far from those one would obtain running the same analyses on the observed data.
+That is, the synthetic data has low utility.
+However, it can also be the case that the model fits the data a bit too good. 
+If the synthetic data model overfits, we risk that the observed data is reproduced when sampling from the synthetic data model, protecting privacy very poorly.
+You might notice that also here the privacy-utility trade-off plays a major role: a simpler synthesis model typically leaks less information, but might also fail to capture more complex characteristics of the observed data.
+
+```{r}
+
+```
+
+
+Of course, whether the model of choice is sufficient very much depends on what the data is supposed to be used for.
+If only means and variances are important in the synthetic data
+
+
+, in the sense that the variables in the synthetic data have similar distributions as 
+A model that is very close to the true distribution of the data will yield synthetic data that are very similar to the observed data without being too disclosive, because the distribution of the 
+
+and two flavours of this are most common. 
+
+
+
