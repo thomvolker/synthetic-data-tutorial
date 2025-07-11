@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Thom Benjamin Volker">
 
-<title>index – Generating and evaluating synthetic data in R</title>
+<title>Synthetic data: The general idea – Generating and evaluating synthetic data in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -70,6 +71,35 @@ ul.task-list li input[type="checkbox"] {
 
 <!-- See the OSC internal instructions on how to generate and include the code necessary for the Matomo Analytics tracking. -->
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="https://raw.githubusercontent.com/lmu-osc/branding-resources/refs/heads/main/lmu-osc-styles.css">
 </head>
@@ -127,7 +157,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">index</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Synthetic data: The general idea</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -179,20 +209,33 @@ ul.task-list li input[type="checkbox"] {
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar"><div class="quarto-margin-header"><div class="margin-header-item">
 <p><img src="../assets/LMU_OSC_logo.svg" class="img-fluid" width="175"></p>
 </div></div>
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#synthetic-data-what-it-is-and-what-it-is-about" id="toc-synthetic-data-what-it-is-and-what-it-is-about" class="nav-link active" data-scroll-target="#synthetic-data-what-it-is-and-what-it-is-about">Synthetic data: What it is and what it is about?</a></li>
+  <li><a href="#the-synthetic-data-model" id="toc-the-synthetic-data-model" class="nav-link" data-scroll-target="#the-synthetic-data-model">The synthetic data model</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/REPO-NAME-HERE/edit/main/synthetic/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/REPO-NAME-HERE/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">index</h1>
+<h1 class="title">Synthetic data: The general idea</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Thom Benjamin Volker </p>
+          </div>
+  </div>
     
   
     
@@ -203,8 +246,21 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="synthetic-data-what-it-is-and-what-it-is-about" class="level1">
+<h1>Synthetic data: What it is and what it is about?</h1>
+<p>The idea of synthetic data has first been proposed independently by Donald B. Rubin and Roderick J.A. Little, who you may know as members of the founding fathers of modern missing data theory in 1993 <span class="citation" data-cites="rubin little">[@rubin; @little]</span>. Both proposed, albeit in slightly different ways, to not release the original data, but replace values from the original data with values drawn from some model. That is, synthetic data is nothing more than <em>generated</em> data, and is occasionally called <em>simulated data</em>, <em>digital twins</em> or even <em>fake</em> data. This model can be specified independent of the data at hand, but typically it is estimated on a data set. Moreover, the model can range from very simple (e.g., a set of values with attached probabilities) to extremely complex (e.g., a neural network with billions of parameters). Whatever model is used, it is important that new samples can be generated from it.</p>
+<p>In what follows, we assume that there is a observed data set, <span class="math inline">\(X\)</span>, consisting of <span class="math inline">\(n\)</span> observations measured on <span class="math inline">\(p\)</span> variables. Furthermore, we assume that these observations adhere to some structure that we can encode in the joint distribution of the variables, <span class="math inline">\(f(X)\)</span>. If we would know this distribution, we could sample new observations from it directly, but we typically do not know this. However, we can estimate this joint distribution, leading to <span class="math inline">\(\hat{f}(X)\)</span>, and sample new observations from this.</p>
+</section>
+<section id="the-synthetic-data-model" class="level1">
+<h1>The synthetic data model</h1>
+<p>How to estimate this joint distribution is essentially a question of how to specify the synthetic data model. If our model approximates the true data generating process reasonably well, we can expect fairly high quality synthetic data. To be a bit more precise, this means that both univariate and multivariate patterns of the observed data are preserved in the synthetic data: the univariate characteristics of the variables are thus preserved, but also relationships between variables are captured in the synthetic data. Moreover, if we model <span class="math inline">\(p(X)\)</span> accurately and draw new samples from this model, our data should be protected sufficiently well, because the newly sampled synthetic observations are independent of the observed data.</p>
+<p>This can go wrong in two different ways. First, it can be that our model of <span class="math inline">\(p(X)\)</span> is far from accurate, because it misses important aspects of the underlying distribution. For example, we might select a model that does not capture the shape of some variables. Or we could miss some important relationships between variables. In such cases, the synthetic data might not look like the observed data, and some analyses performed on the synthetic data might yield results that are far from those one would obtain running the same analyses on the observed data. That is, the synthetic data has low utility. However, it can also be the case that the model fits the data a bit too good. If the synthetic data model overfits, we risk that the observed data is reproduced when sampling from the synthetic data model, protecting privacy very poorly. You might notice that also here the privacy-utility trade-off plays a major role: a simpler synthesis model typically leaks less information, but might also fail to capture more complex characteristics of the observed data.</p>
+<p>Of course, whether the model of choice is sufficient very much depends on what the data is supposed to be used for. If only means and variances are important in the synthetic data</p>
+<p>, in the sense that the variables in the synthetic data have similar distributions as A model that is very close to the true distribution of the data will yield synthetic data that are very similar to the observed data without being too disclosive, because the distribution of the</p>
+<p>and two flavours of this are most common.</p>
 
 
+</section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -614,7 +670,7 @@ ul.task-list li input[type="checkbox"] {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright, 2024 Open Science Center at LMU Munich</p>
-<div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/REPO-NAME-HERE/edit/main/synthetic/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/REPO-NAME-HERE/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/lmu-osc/REPO-NAME-HERE/edit/main/synthetic/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/REPO-NAME-HERE/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
