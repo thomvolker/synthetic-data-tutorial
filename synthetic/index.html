@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.7.29">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -21,6 +21,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -38,10 +73,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-0815c480559380816a4d1ea211a47e91.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-7f602ad2bce0851e5eeb5c2d873b7f9b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-7c905c9fc8f78cd3d6f96538ce4b7aee.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -68,8 +103,14 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="../site_libs/kePrint-0.0.1/kePrint.js"></script>
+
+<link href="../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+
 
 <!-- See the OSC internal instructions on how to generate and include the code necessary for the Matomo Analytics tracking. -->
+
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -137,12 +178,12 @@ window.Quarto = {
       <a href="" title="" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label=""><i class="bi bi-github"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
           <li>
-            <a class="dropdown-item quarto-navbar-tools-item" href="https://github.com/lmu-osc/REPO-NAME-HERE">
+            <a class="dropdown-item quarto-navbar-tools-item" href="https://github.com/lmu-osc/synthetic-data-tutorial">
             Source Code
             </a>
           </li>
           <li>
-            <a class="dropdown-item quarto-navbar-tools-item" href="https://github.com/lmu-osc/REPO-NAME-HERE/issues">
+            <a class="dropdown-item quarto-navbar-tools-item" href="https://github.com/lmu-osc/synthetic-data-tutorial/issues">
             Report a Bug
             </a>
           </li>
@@ -191,6 +232,12 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../synthetic/" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Synthetic data: The general idea</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../generation/" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Generating synthetic data</span></a>
   </div>
@@ -207,16 +254,20 @@ window.Quarto = {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar"><div class="quarto-margin-header"><div class="margin-header-item">
-<p><img src="../assets/LMU_OSC_logo.svg" class="img-fluid" width="175"></p>
+<p><img src="..\assets/LMU_OSC_logo.svg" class="img-fluid" width="175"></p>
 </div></div>
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
   <li><a href="#synthetic-data-what-it-is-and-what-it-is-about" id="toc-synthetic-data-what-it-is-and-what-it-is-about" class="nav-link active" data-scroll-target="#synthetic-data-what-it-is-and-what-it-is-about">Synthetic data: What it is and what it is about?</a></li>
-  <li><a href="#the-synthetic-data-model" id="toc-the-synthetic-data-model" class="nav-link" data-scroll-target="#the-synthetic-data-model">The synthetic data model</a></li>
+  <li><a href="#the-synthetic-data-model" id="toc-the-synthetic-data-model" class="nav-link" data-scroll-target="#the-synthetic-data-model">The synthetic data model</a>
+  <ul class="collapse">
+  <li><a href="#exercise-a-simple-synthetic-data-model" id="toc-exercise-a-simple-synthetic-data-model" class="nav-link" data-scroll-target="#exercise-a-simple-synthetic-data-model">Exercise: A simple synthetic data model</a></li>
+  </ul></li>
+  <li><a href="#synthetic-data-for-open-science" id="toc-synthetic-data-for-open-science" class="nav-link" data-scroll-target="#synthetic-data-for-open-science">Synthetic data for open science</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/REPO-NAME-HERE/edit/main/synthetic/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/REPO-NAME-HERE/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/edit/main/synthetic/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -253,16 +304,265 @@ window.Quarto = {
 </section>
 <section id="the-synthetic-data-model" class="level1">
 <h1>The synthetic data model</h1>
-<p>How to estimate this joint distribution is essentially a question of how to specify the synthetic data model. If our model approximates the true data generating process reasonably well, we can expect fairly high quality synthetic data. To be a bit more precise, this means that both univariate and multivariate patterns of the observed data are preserved in the synthetic data: the univariate characteristics of the variables are thus preserved, but also relationships between variables are captured in the synthetic data. Moreover, if we model <span class="math inline">\(p(X)\)</span> accurately and draw new samples from this model, our data should be protected sufficiently well, because the newly sampled synthetic observations are independent of the observed data.</p>
-<p>This can go wrong in two different ways. First, it can be that our model of <span class="math inline">\(p(X)\)</span> is far from accurate, because it misses important aspects of the underlying distribution. For example, we might select a model that does not capture the shape of some variables. Or we could miss some important relationships between variables. In such cases, the synthetic data might not look like the observed data, and some analyses performed on the synthetic data might yield results that are far from those one would obtain running the same analyses on the observed data. That is, the synthetic data has low utility. However, it can also be the case that the model fits the data a bit too good. If the synthetic data model overfits, we risk that the observed data is reproduced when sampling from the synthetic data model, protecting privacy very poorly. You might notice that also here the privacy-utility trade-off plays a major role: a simpler synthesis model typically leaks less information, but might also fail to capture more complex characteristics of the observed data.</p>
-<p>Of course, whether the model of choice is sufficient very much depends on what the data is supposed to be used for. If only means and variances are important in the synthetic data</p>
-<p>, in the sense that the variables in the synthetic data have similar distributions as A model that is very close to the true distribution of the data will yield synthetic data that are very similar to the observed data without being too disclosive, because the distribution of the</p>
-<p>and two flavours of this are most common.</p>
+<p>How to estimate this joint distribution is essentially a question of how to specify the synthetic data model. If our model approximates the true data generating process reasonably well, we can expect fairly high quality synthetic data. To be a bit more precise, this means that both univariate and multivariate patterns of the observed data are preserved in the synthetic data: the univariate characteristics of the variables are thus preserved, but also relationships between variables are captured in the synthetic data. Moreover, if we model <span class="math inline">\(f(X)\)</span> accurately and draw new samples from this model, our data should be protected sufficiently well, because the newly sampled synthetic observations are independent of the observed data.</p>
+<p>Two strategies have emerged to generate synthetic samples. First, we can model the multivariate distribution of the data directly, specifying one joint model for all variables. We can, for example, model the distribution of the data using a normal approximation. That is, we estimate the means and covariances of the variables in the data, assume normality, and generate synthetic samples from this normal distribution. For many data sets, however, this normal approximation provides a poor fit. In the past decade, deep learning has become popular for the generation of synthetic data. An advantage of these methods, in particular generative adversarial networks (GANs) and variational auto-encoders (VAEs), is that they do not assume a particular parametric distribution (like the normal approximation we just discussed). Rather, these methods attempt to learn the distribution of the data, by transforming relatively simple input data in a way that resembles the observed data. While these methods can achieve state-of-the-art performance, but extensive tuning is often required to achieve this performance. Moreover, tuning these models such that they produce realistic synthetic data is non-trivial and often performed in an ad hoc fashion, subsantially lowering user-friendliness.</p>
+<p>A second strategy is to break the joint distribution of the data into a series of conditional distributions, one for each variable (or a block of variables). That is, we can factor the joint distribution of the data into a series of conditionals <span class="math display">\[
+f(X) = f_1(X_1) f_2(X_2|X_1) \dots f_p(X_p|X_1, \dots X_{p-1}),
+\]</span> which greatly simplifies the modelling task. That is, rather than specifying the joint distribution, we can model the distribution of each variable separately, somewhat akin to specifying a good prediction model. Moreover, all model evaluation techniques (such as posterior predictive checking) can be used now, and possible improvements can be directly incorporated in the synthesis model. For example, if a model with a linear relationship between two variables yields a poor fit, a non-linear relationship can be easily incorporated in the synthesis model. Moreover, if a appropriate a different model can be used for each variable, which allows the practitioner a great deal of flexibility. Throughout, we focus on synthesis methods that employ this conditional modelling strategy (commonly called fully conditional specification or sequential regression).</p>
+<section id="exercise-a-simple-synthetic-data-model" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-a-simple-synthetic-data-model">Exercise: A simple synthetic data model</h2>
+<p>To get a flavour of the two modelling approaches, you will show that it is indeed possible to model a joint distribution as a series of conditionals. For this exercise (and all exercises in subsequent sections), we will use the <code>boys</code> data from the <code>R</code>-package <code>mice</code>,<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> and for the time being, we focus on the first three variables. You can obtain the data as follows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">url</span>(<span class="st">"https://github.com/lmu-osc/synthetic-data-tutorial/raw/refs/heads/main/data/boys.RDS"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>data_subset <span class="ot">&lt;-</span> data[,<span class="fu">c</span>(<span class="st">"age"</span>, <span class="st">"hgt"</span>, <span class="st">"wgt"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Description of the `boys` data">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Description of the <code>boys</code> data
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The <code>boys</code> data contains measurements on 9 variables on 748 Dutch boys. The variables in the data are described below, as well as the first six observations.</p>
+<ul>
+<li><code>age</code>: Decimal age (0-21 years)</li>
+<li><code>hgt</code>: Height (cm)</li>
+<li><code>wgt</code>: Weight (kg)</li>
+<li><code>bmi</code>: Body mass index</li>
+<li><code>hc</code>: Head circumference (cm)</li>
+<li><code>gen</code>: Genital Tanner stage (G1-G5)</li>
+<li><code>phb</code>: Pubic hair (Tanner P1-P6)</li>
+<li><code>tv</code>: Testicular volume (ml)</li>
+<li><code>reg</code>: Region (north, east, west, south, city)</li>
+</ul>
+<div class="cell" data-tbl-cap="The `boys` data from the `R`-package `mice`">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data) <span class="sc">|&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">2</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-striped table-hover caption-top table-sm small" data-quarto-postprocess="true">
+<caption>The <code>boys</code> data from the <code>R</code>-package <code>mice</code></caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;" data-quarto-table-cell-role="th">age</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">hgt</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">wgt</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">bmi</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">hc</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">gen</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">phb</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">tv</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">reg</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">50.1</td>
+<td style="text-align: right;">3.65</td>
+<td style="text-align: right;">14.54</td>
+<td style="text-align: right;">33.7</td>
+<td style="text-align: left;">G3</td>
+<td style="text-align: left;">P4</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">south</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">53.5</td>
+<td style="text-align: right;">3.37</td>
+<td style="text-align: right;">11.77</td>
+<td style="text-align: right;">35.0</td>
+<td style="text-align: left;">G2</td>
+<td style="text-align: left;">P3</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">south</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0.06</td>
+<td style="text-align: right;">50.0</td>
+<td style="text-align: right;">3.14</td>
+<td style="text-align: right;">12.56</td>
+<td style="text-align: right;">35.2</td>
+<td style="text-align: left;">G2</td>
+<td style="text-align: left;">P3</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">south</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.06</td>
+<td style="text-align: right;">54.5</td>
+<td style="text-align: right;">4.27</td>
+<td style="text-align: right;">14.37</td>
+<td style="text-align: right;">36.7</td>
+<td style="text-align: left;">G2</td>
+<td style="text-align: left;">P1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">south</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0.06</td>
+<td style="text-align: right;">57.5</td>
+<td style="text-align: right;">5.03</td>
+<td style="text-align: right;">15.21</td>
+<td style="text-align: right;">37.3</td>
+<td style="text-align: left;">G1</td>
+<td style="text-align: left;">P2</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">south</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.07</td>
+<td style="text-align: right;">55.5</td>
+<td style="text-align: right;">4.66</td>
+<td style="text-align: right;">15.11</td>
+<td style="text-align: right;">37.0</td>
+<td style="text-align: left;">G1</td>
+<td style="text-align: left;">P2</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">south</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><strong>1. Store the means and variance covariance matrix of the just created subset of the <code>boys</code> data.</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>means <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(data_subset)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>varcov <span class="ot">&lt;-</span> <span class="fu">var</span>(data_subset)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>2. Create your first synthetic data set by calling <code>mvtnorm::rmvnorm</code> with the sample size equal to <span class="math inline">\(n = 748\)</span>, and use the stored mean-vector and variance-covariance matrix.</strong></p>
+<p><em>Note: You may set the seed here for reproducibility.</em></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#set.seed(12)</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>syn1 <span class="ot">&lt;-</span> mvtnorm<span class="sc">::</span><span class="fu">rmvnorm</span>(</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">nrow</span>(data_subset),</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> means,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">sigma =</span> varcov</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We will now do the same, but then using the conditional modelling strategy outlined above. To do this, we need the regression models <code>hgt ~ age</code> and <code>wgt ~ age + hgt</code> fitted on the observed data. Moreover, we need the residual variances of each model.</p>
+<p><strong>3. Regress <code>hgt</code> on <code>age</code> and <code>wgt</code> on <code>age</code> and <code>hgt</code>, and store the results.</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>hgtage <span class="ot">&lt;-</span> <span class="fu">lm</span>(hgt <span class="sc">~</span> age, <span class="at">data =</span> data_subset)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>wgtagehgt <span class="ot">&lt;-</span> <span class="fu">lm</span>(wgt <span class="sc">~</span> age <span class="sc">+</span> hgt, <span class="at">data =</span> data_subset) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>4. Now store the mean of the variable <code>age</code> with corresponding standard deviation.</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>mean_age <span class="ot">&lt;-</span> <span class="fu">mean</span>(data_subset<span class="sc">$</span>age)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>sd_age <span class="ot">&lt;-</span> <span class="fu">sd</span>(data_subset<span class="sc">$</span>age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now, we have everything in place to start the synthesis process. We first generate the variable <code>age</code>, then <code>hgt</code> and then <code>wgt</code>.</p>
+<p><strong>5. Draw <span class="math inline">\(n_{syn} = 748\)</span> samples from a normal distribution with mean equal to <code>mean_age</code> and standard deviation equal to <code>sd_age</code>.</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>nsyn <span class="ot">&lt;-</span> <span class="fu">nrow</span>(data_subset)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>age_syn <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> nsyn,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> mean_age,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd =</span> sd_age</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>6. Use the synthetic <code>age</code> values to predict an equal number of <code>hgt</code> values, and add normal noise based on the residual standard deviation of the model fitted on the observed data.</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>hgt_coefs <span class="ot">&lt;-</span> <span class="fu">coef</span>(hgtage)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>hgt_sd <span class="ot">&lt;-</span> <span class="fu">summary</span>(hgtage)<span class="sc">$</span>sigma</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>hgt_syn <span class="ot">&lt;-</span> hgt_coefs[<span class="dv">1</span>] <span class="sc">+</span> hgt_coefs[<span class="dv">2</span>] <span class="sc">*</span> age_syn <span class="sc">+</span> <span class="fu">rnorm</span>(nsyn, <span class="dv">0</span>, hgt_sd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>7. Now, use the synthetic <code>age</code> and <code>hgt</code> values to predict an equal number of <code>wgt</code> values, and again add normal noise based on the residual standard deviation of the model fitted on the observed data.</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>wgt_coefs <span class="ot">&lt;-</span> <span class="fu">coef</span>(wgtagehgt)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>wgt_sd <span class="ot">&lt;-</span> <span class="fu">summary</span>(wgtagehgt)<span class="sc">$</span>sigma</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>wgt_syn <span class="ot">&lt;-</span> wgt_coefs[<span class="dv">1</span>] <span class="sc">+</span> wgt_coefs[<span class="dv">2</span>] <span class="sc">*</span> age_syn <span class="sc">+</span> wgt_coefs[<span class="dv">3</span>] <span class="sc">*</span> hgt_syn <span class="sc">+</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rnorm</span>(nsyn, <span class="dv">0</span>, wgt_sd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>8. Compare the means and variance-covariance matrices of the two synthetic data sets with the estimates from the observed data.</strong></p>
+<p>First, we show the means.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>syn2 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(age_syn, hgt_syn, wgt_syn)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">obs =</span> means,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">syn1 =</span> <span class="fu">colMeans</span>(syn1),</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">syn2 =</span> <span class="fu">colMeans</span>(syn2)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           obs       syn1       syn2
+age   9.158866   9.084845   9.374006
+hgt 131.144519 130.155010 132.546036
+wgt  37.148036  37.276892  38.454073</code></pre>
+</div>
+</div>
+<p>These are all reasonably close! We subsequently compare the variances.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>varcov</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          age      hgt       wgt
+age  47.52796  312.754  170.6746
+hgt 312.75400 2162.260 1143.0411
+wgt 170.67462 1143.041  677.9364</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(syn1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          age       hgt       wgt
+age  48.53048  320.4726  173.7471
+hgt 320.47264 2219.1384 1169.1029
+wgt 173.74714 1169.1029  691.0047</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(syn2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          age_syn  hgt_syn   wgt_syn
+age_syn  49.09677  323.961  176.7435
+hgt_syn 323.96095 2234.969 1189.3814
+wgt_syn 176.74347 1189.381  705.2342</code></pre>
+</div>
+</div>
+<p>Also the variance covariance matrices are very close, as we would expect. However, these are the parameters that we specified, so these should be reasonably close, because anything else suggests a coding error. We can go further comparing the distributions of the variables, but we save that exercise for later.</p>
+<p>For now, we conclude with the statement that synthetic data models can be misspecified in two ways. First, it can be that our model of <span class="math inline">\(f(X)\)</span> is far from accurate, because it misses important aspects of the underlying distribution. For example, we might select a model that does not capture the shape of some variables. Or we could miss some important relationships between variables. In such cases, the synthetic data might not look like the observed data, and some analyses performed on the synthetic data might yield results that are far from those one would obtain running the same analyses on the observed data. That is, the synthetic data has low utility. However, it can also be the case that the model fits the data a bit too good. If the synthetic data model overfits, we risk that the observed data is reproduced when sampling from the synthetic data model, protecting privacy very poorly. You might notice that also here the privacy-utility trade-off plays a major role: a simpler synthesis model typically leaks less information, but might also fail to capture more complex characteristics of the observed data.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-privacy-utility-model" class="quarto-float quarto-figure quarto-figure-center anchored" width="864">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-privacy-utility-model-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-privacy-utility-model-1.png" id="fig-privacy-utility-model" class="img-fluid figure-img" width="864">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-privacy-utility-model-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>For a better grasp of this privacy-utility trade-off, <a href="#fig-privacy-utility-model" class="quarto-xref">Figure&nbsp;1</a> might be illuminating. The figure shows the relationship between age and testicular volume for a small subset of Dutch boys, from a random sample of 10% from the cross-sectional data (see <code>?mice::boys</code> for more information). It is quite clear that until approximately 10 years, testicular volume is very small and remains close to constant, after which it increases between 10 and 16 years, after which it tapers of again. If we would model this using a linear model (the green line), and generate new samples from this (the green points in the left subplot on the second row), we see a relatively poor fit: some negative values occur, some values that are too large between age 5 and 10 and too many values relatively small after age 16. So, our synthetic data is not too realistic if we would use this model, and it can be argued that it has relatively low utility. If we would model the data with a very flexible model (the blue line, and blue points in the middle plot on the second row), we can achieve very high utility. In fact, we can reproduce the observed testicular volume values exactly from the observed age values. This poses a significant privacy threat, as knowing someones age allows to directly infer their testicular volume, which is information someone perhaps rather keeps private. The third figure on the bottom row shows a model that achieves a better balance: realistic synthetic data can be drawn from the model, but there is sufficient uncertainty, in the sense that synthetic data points (the red points) substantially deviate from the best fitting line, but still blend nicely with the observed data points.</p>
+</section>
+</section>
+<section id="synthetic-data-for-open-science" class="level1">
+<h1>Synthetic data for open science</h1>
+<p>As in any data release, the privacy-utility trade-off should guide the release of a synthetic data set. That is, what goals should be achieveable with the synthetic data, and what privacy risks are looming.</p>
+<p>On the one hand, modellers should thus evaluate disclosure risks. Does the data contain sensitive information that must be protected, what are the risks if there is a disclosure, is there information that can be shared without any danger? [TODO: Expand this section on disclosure risks (see SDC handbook guideliens)].</p>
+<p>[TODO: Streamline train of thought here.] On the other hand, one should consider what the synthetic data ought to be used for. For instance, for reproducing a regression analysis, means and covariances should be reproduced with reasonable accuracy, but preserving higher order moments (like skewness or kurtosis) or complex relationships might not be necessary. If the data ought to be used for future research, including complex modelling, such characteristics should be considered. Typically, it is safe to assume that aspects of the data that are not modelled explicitly (e.g., interactions between variables, non-linear relationships, fat tails or even multi-level structure) will not appear in the synthetic data, although some exceptions are possible by choosing flexible synthesis models.</p>
 
 
 </section>
 
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>I filled in the missing values through imputation, so we don’t have to deal with these. However, this implies that we cannot use the <code>boys</code> data from the <code>mice</code>-package directly<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -669,8 +969,8 @@ window.Quarto = {
       &nbsp;
     </div>   
     <div class="nav-footer-center">
-<p>Copyright, 2024 Open Science Center at LMU Munich</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/lmu-osc/REPO-NAME-HERE/edit/main/synthetic/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/REPO-NAME-HERE/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<p>Copyright, 2025 Open Science Center at LMU Munich</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/edit/main/synthetic/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
