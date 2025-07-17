@@ -318,7 +318,7 @@ window.Quarto = {
 <section id="synthetic-data-what-it-is-and-what-it-is-about" class="level1">
 <h1>Synthetic data: What it is and what it is about?</h1>
 <hr>
-<p>The idea of synthetic data has first been proposed independently by Donald B. Rubin and Roderick J.A. Little, who you may know as members of the founding fathers of modern missing data theory in 1993 [<span class="citation" data-cites="rubin">(<a href="#ref-rubin" role="doc-biblioref"><strong>rubin?</strong></a>)</span>; <span class="citation" data-cites="little">(<a href="#ref-little" role="doc-biblioref"><strong>little?</strong></a>)</span>; TODO: FIX REFS]. Both proposed, albeit in slightly different ways, to not release the original data, but replace values from the original data with values drawn from some model. That is, synthetic data is nothing more than <em>generated</em> data, and is occasionally called <em>simulated data</em>, <em>digital twins</em> or even <em>fake</em> data. This model can be specified independent of the data at hand, but typically it is estimated on a data set. Moreover, the model can range from very simple (e.g., a set of values with attached probabilities) to extremely complex (e.g., a neural network with billions of parameters). Whatever model is used, it is essential that new samples can be generated from it.</p>
+<p>The idea of synthetic data has first been proposed independently by Donald B. Rubin and Roderick J.A. Little, who you may know as members of the founding fathers of modern missing data theory in 1993 <span class="citation" data-cites="rubin1993statistical little_synthetic_1993">(<a href="#ref-rubin1993statistical" role="doc-biblioref">Rubin 1993</a>; <a href="#ref-little_synthetic_1993" role="doc-biblioref">Little 1993</a>)</span>. Both proposed, albeit in slightly different ways, to not release the original data, but replace values from the original data with values drawn from some model. That is, synthetic data is nothing more than <em>generated</em> data, and is occasionally called <em>simulated data</em>, <em>digital twins</em> or even <em>fake</em> data. This model can be specified independent of the data at hand, but typically it is estimated on a data set. Moreover, the model can range from very simple (e.g., a set of values with attached probabilities) to extremely complex (e.g., a neural network with billions of parameters). Whatever model is used, it is essential that new samples can be generated from it.</p>
 <p>In what follows, we assume that there is a observed data set, <span class="math inline">\(X\)</span>, consisting of <span class="math inline">\(n\)</span> observations measured on <span class="math inline">\(p\)</span> variables. Furthermore, we assume that these observations adhere to some structure that we can encode in the joint distribution of the variables, <span class="math inline">\(f(X)\)</span>. If we would know this distribution, we could sample new observations from it directly, but we typically do not know this. However, we can estimate this joint distribution, leading to <span class="math inline">\(\hat{f}(X)\)</span>, and sample new observations from this.</p>
 <hr>
 </section>
@@ -355,7 +355,7 @@ Additional resources
 </ul>
 <p>If you are interested in any additional resources on <strong>fully conditional specification</strong>, the following papers might be informative.</p>
 <ul>
-<li><span class="citation" data-cites="buuren_fcs_2006">Buuren et al. (<a href="#ref-buuren_fcs_2006" role="doc-biblioref">2006</a>)</span>: explains the procedure in the context of missing data. Again, adapting the framework to synthetic data is straightforward (see, for instance, TODO: ADD REF).</li>
+<li><span class="citation" data-cites="buuren_fcs_2006">Buuren et al. (<a href="#ref-buuren_fcs_2006" role="doc-biblioref">2006</a>)</span>: explains the procedure in the context of missing data. Again, adapting the framework to synthetic data is straightforward.</li>
 <li><span class="citation" data-cites="drechsler_synthetic_2011">Drechsler (<a href="#ref-drechsler_synthetic_2011" role="doc-biblioref">2011</a>)</span> (section 3.1.2) discusses the concept of fully conditional specification (and compares it to joint modelling in the subsequent section).</li>
 </ul>
 </div>
@@ -567,6 +567,7 @@ Description of the <code>boys</code> data
 </div>
 <hr>
 <p><strong>8. Compare the means and variance-covariance matrices of the two synthetic data sets with the estimates from the observed data.</strong></p>
+<hr>
 <p>First, we calculate the means of the observed and synthetic variables.</p>
 <div class="cell">
 <details class="code-fold">
@@ -637,8 +638,14 @@ Drechsler, Jörg. 2011. <em>Synthetic Datasets for Statistical Disclosure Contro
 <div id="ref-hundepool2024" class="csl-entry" role="listitem">
 Hundepool, Anco, Josep Domingo-Ferrer, Luisa Franconi, Sarah Giessing, Rainer Lenz, Jane Naylor, Eric Schulte Nordholt, et al. 2024. <em>Handbook on Statistical Disclosure Control</em>.
 </div>
+<div id="ref-little_synthetic_1993" class="csl-entry" role="listitem">
+Little, Roderick JA. 1993. <span>“Statistical Analysis of Masked Data.”</span> <em>Journal of Official Statistics</em> 9 (2): 407.
+</div>
 <div id="ref-murray_multiple_2018" class="csl-entry" role="listitem">
 Murray, Jared S. 2018. <span>“Multiple Imputation: A Review of Practical and Theoretical Findings.”</span> <em>Statistical Science</em> 33 (2): 142–59. <a href="https://doi.org/10.1214/18-STS644">https://doi.org/10.1214/18-STS644</a>.
+</div>
+<div id="ref-rubin1993statistical" class="csl-entry" role="listitem">
+Rubin, Donald B. 1993. <span>“Statistical Disclosure Limitation.”</span> <em>Journal of Official Statistics</em> 9 (2): 461–68.
 </div>
 <div id="ref-volker_gans_2025" class="csl-entry" role="listitem">
 Volker, Thom Benjamin. 2025. <span>“Illustrative GANs for Simple Synthetic Data with Keras in r.”</span> July 14, 2025. <a href="https://thomvolker.github.io/blog/1407_gans_in_r/">https://thomvolker.github.io/blog/1407_gans_in_r/</a>.
