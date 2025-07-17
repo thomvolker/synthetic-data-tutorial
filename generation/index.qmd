@@ -1,23 +1,250 @@
 ---
-title: "Page Title Here"
+title: "Generating synthetic data in `R` using `synthpop`"
+author: Thom Benjamin Volker
+bibliography: ../references.bib
 ---
 
+Now that we understand the concept of synthetic data and know about the dangers and potential, it is time to actually generate synthetic data in `R`. 
+Throughout, we will use the `synthpop` package [@synthpop], which is a powerful tool explicitly designed to generate synthetic data.
+Other alternatives to create synthetic data are, for example, the `R`-package `mice` [@mice; @volker_anonymiced_2021] or the stand-alone software IVEware [@iveware].
 
-The headers below cause the table of contents/dropdown on the right to be visible. 
+---
 
-# Level One Header
+# Data
 
-## Level Two
+---
 
-### L3
+Throughout the practical, we will continue with the `boys` data from the `mice` package that we also used in the previous section.
+Note that you cannot simply load the data from the `mice` package, because the missing values are imputed to simplify the practical. 
+You can download the data as follows:
 
-### L3 Again
+```{r}
+#| label: load data
+data <- readRDS(
+    url("https://github.com/lmu-osc/synthetic-data-tutorial/raw/refs/heads/main/data/boys.RDS")
+)
+```
 
-### And one more time
+The `boys` data contains measurements on `r ncol(mice::boys)` variables on `r nrow(mice::boys)` Dutch boys. The variables in the data are described in the block below.
 
-## Another Level Two
+::: {.callout-tip collapse="true" title="Description of the `boys` data"}
+
+- `age`: Decimal age (0-21 years)
+- `hgt`: Height (cm)
+- `wgt`: Weight (kg)
+- `bmi`: Body mass index
+- `hc`: Head circumference (cm)
+- `gen`: Genital Tanner stage (G1-G5)
+- `phb`: Pubic hair (Tanner P1-P6)
+- `tv`: Testicular volume (ml)
+- `reg`: Region (north, east, west, south, city)
 
 
-# Level One Again
+:::
 
-## Level Two
+---
+
+# Loading the required packages
+
+---
+
+In this workshop, you will use the packages `synthpop` [@synthpop] and `densityratio` [@densityratio].
+Make sure to load all of the required packages, and in case you haven't installed them already, install them first, using `install.packages("package_name")`.
+
+---
+
+__1. Install the `R`-packages `synthpop` and `densityratio` from `CRAN`, and load these packages using `library()`.__
+
+```{r}
+#| label: install-packages
+#| code-fold: true
+#| code-summary: "Show code: Installing required packages"
+#| eval: false
+
+install.packages("synthpop")
+install.packages("densityratio")
+```
+
+```{r}
+#| label: load-packages
+#| code-fold: true
+#| code-summary: "Show code: Loading required packages"
+#| message: false
+#| warning: false
+
+library(synthpop)
+library(densityratio)
+```
+
+---
+
+# Getting to know the data
+
+---
+
+Normally, this step would be redundant, as you probably analyzed the data of interest already and know all the ins and outs. 
+However, if the `boys` data is new for you, it is helpful to invest some time in getting to know the data you will be working with. 
+When creating synthetic data, it eases the modelling procedure when you know what variables there are in the data, and which kinds of relationships you can expect.
+
+---
+
+__2. Inspect the first few rows of the data using `head()`.__
+
+```{r}
+#| label: inspect-data
+#| code-fold: true
+#| code-summary: "Show code: Inspect first few rows"
+#| output: false
+
+head(data)
+```
+
+---
+
+__3. Use the `summary()` function to get an overview of the data.__
+
+---
+
+```{r}
+#| label: summary-data
+#| code-fold: true
+#| code-summary: "Show code: Inspect first few rows"
+#| output: false
+
+summary(data)
+```
+
+You may notice a couple of things. First, the data seems to be sorted on age. You may verify this by running `!is.unsorted(data$age)`. Second, you may notice that most variables are non-negative, which might be something you want to take into account when modelling the data (but perhaps, this is not so relevant for the analysis at hand; for now, we assume it is).
+Third, you may notice that the variables `hgt`, `wgt` and `bmi` yield a deterministic system when considered simultaneously.
+That is, the values for `bmi` should be consistent with the respective values of `hgt` and `wgt`. 
+This is also we want to take into account when modelling the data.
+Finally, the data consists of a mix of continuous and categorical variables, which allows to model variables of both types. 
+
+--- 
+
+# Creating synthetic data
+
+---
+
+We will continue creating synthetic data with a relatively simple, parametric, synthesis model. 
+To this end, we need to decide on a parametric model to synthesize each variable. 
+Using `synthpop`, this is a piece of cake, as it allows to specify `method = "parametric"`, which selects a parametric model that matches the variable type of the variable at hand. 
+This implies that continuous variables are synthesized using a linear model that preserves the marginal distribution even in the case of non-normality using a nifty transformation of the data.
+Categorical variables with two categories are synthesized with a logistic regression model and categorical variables with more than two categories are synthesized using ordered or unordered polytomous regression, depending on whether the categories are ordered or not, respectively.
+
+---
+
+__4. Use `synthpop()` to create a synthetic data set in an object called `syn_param` using `method = "parametric"`. Use `seed = 123` if you want to replicate our results.__
+
+---
+
+```{r}
+#| label: syn-parametric
+#| code-fold: true
+#| code-summary: "Show code: Generating synthetic data with parametric models"
+
+syn_param <- syn(
+    data = data,
+    method = "parametric",
+    seed = 123,
+    print.flag = FALSE
+)
+```
+
+---
+
+__5. Inspect the `syn_param` object, what do you see?__
+
+---
+
+```{r}
+#| label: syn-parametric-object
+#| code-fold: true
+#| code-summary: "Show code and context of the model object"
+#| eval: false
+
+syn_param
+
+# Calling syn_param shows you some important features of the synthesis 
+# procedure. First, it shows the number of synthetic data sets that were 
+# generated (syn_param$m). Also, it shows for every variable the method 
+# that was used to synthesize the data (syn_param$method). If you want to 
+# know more about a specific synthesis method, for example, logreg, you 
+# can call ?syn.logreg to get more information.
+```
+
+
+If all is well, all continuous variables are strictly positive, which is due to the transformation synthpop performs when modelling the continuous variables.
+However, there is a problem that you might have noticed.
+The variable `bmi` is not equal to `wgt / (hgt/100)^2`. 
+This issue can be fixed using _passive_ synthesis. 
+
+---
+
+# Specifying custom synthesis models
+
+---
+
+In `synthpop`, the synthesis method can be altered using the `method` argument.
+The `method`-vector is a vector that contains, for every variable, the imputation method or passive imputation equation with which this variable should be imputed.
+We can obtain the `method`-vector that we previously specified implicitly by extracting it from the `syn_param` object.
+
+```{r}
+#| label: extract-method
+
+method <- syn_param$method
+method
+```
+
+We can alter the synthesis model for any variable by changing the corresponding element in this vector. 
+For passive imputation, we can define a function using `~I(equation)`. 
+For `bmi`, this entails the following.
+
+```{r}
+#| label: make-passive
+method["bmi"] <- "~I(wgt/(hgt/100)^2)"
+method
+```
+
+With this specification, `synthpop` knows that it should not use an imputation model, but rather use the synthetic `hgt` and `wgt` values to construct the `bmi` values deterministically.
+
+---
+
+__6. Use `synthpop()` to create a synthetic data set in an object called `syn_passive` using the adjusted `method` vector. Again, use `seed = 123` if you want to replicate our results. Inspect the output.__
+
+---
+
+```{r}
+#| label: impute-passive
+#| code-fold: true
+#| code-summary: "Show code: Synthesize with passive synthesis"
+
+syn_passive <- syn(
+    data = data,
+    method = method,
+    seed = 123,
+    print = FALSE
+)
+```
+
+The printed message signals that `synthpop` detects that the specified relationship does not hold in the real data.
+This is not really something to worry about: it is due to rounding errors in `bmi`.
+
+```{r}
+#| label: impute-passive-output
+#| code-fold: true
+#| code-summary: "Show code: Passive model object"
+#| output: false
+syn_passive
+```
+
+The `bmi` values correspond to the synthetic `hgt` and `wgt` values, as we wanted.
+Using this approach, you can also specify different synthesis methods in general, for example to synthesize some of the variables with a random forest model, or to transform some of the variables before synthesizing them. 
+There are too many possibilities to cover in this practical, but the `synthpop` package contains extensive documentation on the possibilities (see, for instance, `?synthpop::syn` and `vignette("synthpop", "synthpop")`).
+
+The previous exercises showed that generating synthetic data can be quite easy. 
+However, depending on the data at hand, it can become more involved.
+For example, there might be a hierarchical structure in the data that you want to preserve, for example because observations are nested within groups, or because the data is longitudinal [to read more about this in the context of imputation for missing data, see @yucel_sequential_2017; @speidel_hmi_2020].
+Modelling such instances might require specialized software, but by using fully conditional specification, one can stitch multiple models together, one variable at a time, to model the joint distribution of the data.
+However, in many use-cases, such advanced modelling is not required, and tuning some synthesis models might already be sufficient.
+In the [subsequent section](../evaluation/), we will discuss how to evaluate the quality of the synthetic data at hand, from both a privacy and utility perspective.

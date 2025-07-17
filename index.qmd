@@ -11,7 +11,7 @@ The tutorial is split into the following sections:
 1.  [Statistical Disclosure Control](sdc/) provides a very brief introduction to statistical disclosure control.
 2.  [Synthetic data: The general idea](synthetic/) conceptually introduces the idea of synthetic data and contains an optional section on coding your own simple synthesizer.
 3.  [Generating synthetic data](geneneration/) introduces the idea of synthetic data and outlines how it can be generated in `R`.
-4.  [Evaluating synthetic data quality](syntheval/page1) addresses the privacy-utility trade-off, and discusses how the quality of synthetic data can be evaluated from both sides of this trade-off.
+4.  [Evaluating synthetic data quality](evaluation/) addresses the privacy-utility trade-off, and discusses how the quality of synthetic data can be evaluated from both sides of this trade-off.
 
 At the end of this tutorial, you will now what synthetic data is and why it is useful, have experience with generating synthetic data, and know how to think about whether the data is fit for release. 
 
@@ -25,5 +25,6 @@ This tutorial assumes you have the following software installed:
 Also, the tutorial requires the following `R` packages:
 
 - [`synthpop`](https://synthpop.org.uk/get-started.html)
+- [`densityratio`](https://thomvolker.github.io/densityratio)
 
 :::

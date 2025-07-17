@@ -82,7 +82,6 @@ In practice, many techniques for statistical disclosure control for microdata (t
 Typically, these techniques introduce both bias and variance to the data to limit disclosure [@fienberg_slavkovic_2011].
 Common methods that have traditionally been used for statistical disclosure control are [e.g., @reiter_2011; @hundepool2024]: 
 
-- **TODO: ADD REFERENCES**
 - Aggregation: collapsing categories into larger overarching categories (e.g., towns into municipalities or regions, divisions into companies).
 - Rounding: replacing original values with their rounded counterpart (e.g., income in thousands of euros, age in years).
 - Top coding: cap all values higher or lower than some threshold to this threshold (sometimes, only relatively extreme values, such as very large income values, yield a high risk of disclosure).
