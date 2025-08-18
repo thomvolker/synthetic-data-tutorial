@@ -1,6 +1,5 @@
 ---
 title: "Evaluating privacy and utility of synthetic data"
-author: Thom Benjamin Volker
 bibliography: ../references.bib
 ---
 
@@ -683,8 +682,11 @@ syn_passive_sdc <- sdc(
 )
 ```
 
+---
 
 # Conclusion
+
+---
 
 In these practicals, you have learned to create and evaluate synthetic data.
 We discussed modelling deterministic relationships, refining synthesis models based on utility measures, comparing utility of synthetic data sets, and evaluating remaining disclosure risks. 

@@ -1,6 +1,5 @@
 ---
 title: "Synthetic data: The general idea"
-author: Thom Benjamin Volker
 bibliography: ../references.bib
 ---
 

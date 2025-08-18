@@ -1,6 +1,5 @@
 ---
 title: "Statistical disclosure control"
-author: "Thom Benjamin Volker"
 bibliography: ../references.bib
 ---
 

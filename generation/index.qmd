@@ -1,6 +1,5 @@
 ---
 title: "Generating synthetic data in `R` using `synthpop`"
-author: Thom Benjamin Volker
 bibliography: ../references.bib
 ---
 
@@ -89,6 +88,8 @@ When creating synthetic data, it eases the modelling procedure when you know wha
 ---
 
 __2. Inspect the first few rows of the data using `head()`.__
+
+---
 
 ```{r}
 #| label: inspect-data
