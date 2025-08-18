@@ -233,8 +233,30 @@ ul.task-list li input[type="checkbox"] {
 <section id="l3-again" class="level3">
 <h3 class="anchored" data-anchor-id="l3-again">L3 Again</h3>
 </section>
-<section id="and-one-more-time" class="level3">
-<h3 class="anchored" data-anchor-id="and-one-more-time">And one more time</h3>
+<section id="getting-to-know-the-data" class="level1">
+<h1>Getting to know the data</h1>
+<hr>
+<p>Normally, this step would be redundant, as you probably analyzed the data of interest already and know all the ins and outs. However, if the <code>boys</code> data is new for you, it is helpful to invest some time in getting to know the data you will be working with. When creating synthetic data, it eases the modelling procedure when you know what variables there are in the data, and which kinds of relationships you can expect.</p>
+<hr>
+<p><strong>2. Inspect the first few rows of the data using <code>head()</code>.</strong></p>
+<hr>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code: Inspect first few rows</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<hr>
+<p><strong>3. Use the <code>summary()</code> function to get an overview of the data.</strong></p>
+<hr>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code: Inspect first few rows</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>You may notice a couple of things. First, the data seems to be sorted on age. You may verify this by running <code>!is.unsorted(data$age)</code>. Second, you may notice that most variables are non-negative, which might be something you want to take into account when modelling the data (but perhaps, this is not so relevant for the analysis at hand; for now, we assume it is). Third, you may notice that the variables <code>hgt</code>, <code>wgt</code> and <code>bmi</code> yield a deterministic system when considered simultaneously. That is, the values for <code>bmi</code> should be consistent with the respective values of <code>hgt</code> and <code>wgt</code>. This is also we want to take into account when modelling the data. Finally, the data consists of a mix of continuous and categorical variables, which allows to model variables of both types.</p>
+<hr>
 </section>
 </section>
 <section id="another-level-two" class="level2">
