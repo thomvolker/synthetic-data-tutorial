@@ -26,5 +26,6 @@ Also, the tutorial requires the following `R` packages:
 
 - [`synthpop`](https://synthpop.org.uk/get-started.html)
 - [`densityratio`](https://thomvolker.github.io/densityratio)
+- [`mvtnorm`](https://mvtnorm.r-forge.r-project.org/)
 
 :::
