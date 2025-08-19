@@ -4,7 +4,7 @@
     "href": "synthetic/index.html",
     "title": "Synthetic data: The general idea",
     "section": "",
-    "text": "The idea of synthetic data has first been proposed independently by Donald B. Rubin and Roderick J.A. Little, who you may know as members of the founding fathers of modern missing data theory in 1993 (Rubin 1993; Little 1993). Both proposed, albeit in slightly different ways, to not release the original data, but replace values from the original data with values drawn from some model. That is, synthetic data is nothing more than generated data, and is occasionally called simulated data, digital twins or even fake data. This model can be specified independent of the data at hand, but typically it is estimated on a data set. Moreover, the model can range from very simple (e.g., a set of values with attached probabilities) to extremely complex (e.g., a neural network with billions of parameters). Whatever model is used, it is essential that new samples can be generated from it.\nIn what follows, we assume that there is a observed data set, \\(X\\), consisting of \\(n\\) observations measured on \\(p\\) variables. Furthermore, we assume that these observations adhere to some structure that we can encode in the joint distribution of the variables, \\(f(X)\\). If we would know this distribution, we could sample new observations from it directly, but we typically do not know this. However, we can estimate this joint distribution, leading to \\(\\hat{f}(X)\\), and sample new observations from this."
+    "text": "#  include: false\n\nlibrary(kableExtra)"
   },
   {
     "objectID": "synthetic/index.html#footnotes",
