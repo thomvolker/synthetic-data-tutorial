@@ -3,6 +3,13 @@ title: "Synthetic data: The general idea"
 bibliography: ../references.bib
 ---
 
+```{r}
+#| label: setup
+#  include: false
+
+library(kableExtra)
+```
+
 # Synthetic data: What it is and what it is about?
 
 ---
