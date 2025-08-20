@@ -29,17 +29,20 @@ To prevent indirect identification, statistical disclosure control can be applie
 The term "Statistical disclosure control" refers to a suite of statistical methods that aim to protect collected data such that they can be safely released to the public without disclosing confidential information about these individuals.
 The goal of statistical disclosure control is to release a data set that is as similar as possible to the original data, while at the same time ensuring that no individual can be identified from the released data, nor any sensitive information can be inferred [@hundepool2024].
 Disclosure is here defined as the release of information about an individual that would not have become public if the data would be kept private. 
-Two types of disclosure risk are commonly considered.
-First, re-identification disclosure concerns when individuals can be singled out from the released data, resulting in confidential data being leaked. 
-Second, attribute disclosure occurs when some characteristic of an individual can be learned with (near) certainty from the data release. 
-For example, if a release discloses that all inhabitants of a street in some city are on welfare, knowing that a person lives in this street discloses information on their welfare status.
-Every data release requires that these types of disclosure risk are sufficiently small.
+Two types of disclosure risk are commonly considered:
+
+1. __Re-identification disclosure__ occurs when individuals can be singled out from the released data, resulting in confidential data being leaked.
+2. __Attribute disclosure__ refers to situations in which characteristics of individuals can be learned with (near) certainty from the data release. For example, if a release discloses that all inhabitants of a street in some city are on welfare, knowing that a person lives in this street discloses information on their welfare status.
+
+Every data release requires that both re-identification disclosure and attribute disclosure risks are sufficiently small.
 
 At the same time, the goal of a data release is to allow others to do something useful with the released data, and for this purpose, the released data should be similar to the original data.
 Similarity, in this context, means that the released, but protected, data can be used for the same purposes as the original data.
 To a reasonable degree, analyses on the released data should yield results similar to results obtained from the original data.
 Similarity does not mean that the released records are similar to the original records, but rather that over the whole, the distributions of the observed and released data are similar.
 Statistical disclosure control often yields a trade-off between privacy and utility: the stricter the data protection, the better the privacy of respondents is protected, but the more information is lost, and the lower the utility of the data.
+
+
 The level of protection required depends on the data at hand: data from an insensitive experiment with only very general personal information may require very little protection, while an extensive survey on criminal behavior or sensitive issues should typically be well-protected.
 At the same time, the level of utility required depends on the problem at hand: if the released data should allow to replicate complex analyses to a reasonable degree of accuracy, more sophisticated disclosure methods are required than when solely some marginal quantities (e.g., means and standard deviations) should be preserved.
 Note that the privacy-utility trade-off is very much relative: a released data set can be very useful for some purposes, but almost useless for others. 
@@ -85,12 +88,12 @@ For example, one might threshold variables such that extreme values are not rele
 As an other example, adding noise to observed values will increase the variance of the released data relative to the observed data. 
 Common methods that have traditionally been used for statistical disclosure control are [e.g., @reiter_2011; @hundepool2024]: 
 
-- Aggregation: collapsing categories into larger overarching categories (e.g., towns into municipalities or regions, divisions into companies).
-- Rounding: replacing original values with their rounded counterpart (e.g., income in thousands of euros, age in years).
-- Top coding: cap all values higher or lower than some threshold to this threshold (sometimes, only relatively extreme values, such as very large income values, yield a high risk of disclosure).
-- Microaggregation: combine observations into groups of some size where people within a group are maximally similar, calculate the group mean for each variable used to form groups, and replace values on these variables by the respective group mean. 
-- Suppression: remove sensitive or identifying values from the released data directly (this can even be an entire variable). 
-- Adding noise: random noise is added to the observed values, such that the released value is different from the underlying observed value.
+- __Aggregation__: collapsing categories into larger overarching categories (e.g., towns into municipalities or regions, divisions into companies).
+- __Rounding__: replacing original values with their rounded counterpart (e.g., income in thousands of euros, age in years).
+- __Top coding__: cap all values higher or lower than some threshold to this threshold (sometimes, only relatively extreme values, such as very large income values, yield a high risk of disclosure).
+- __Microaggregation__: combine observations into groups of some size where people within a group are maximally similar, calculate the group mean for each variable used to form groups, and replace values on these variables by the respective group mean. 
+- __Suppression__: remove sensitive or identifying values from the released data directly (this can even be an entire variable). 
+- __Adding noise__: random noise is added to the observed values, such that the released value is different from the underlying observed value.
 
 Each of these methods methods either introduce errors in the data, such that the released information cannot be inferred to be entirely accurate, or limits the amount of information that is released in such a way that disclosure risks are small.
 However, an important limitation of these methods is that relationships between variables are usually not accounted for. 
