@@ -4,7 +4,7 @@ title: "Welcome to the synthetic data tutorial!"
 
 # Tutorial Overview
 
-This **self-paced tutorial** will introduce you to the generation and evaluation of synthetic data. Synthetic data is generated data that can be used as an alternative to privacy-sensitive data, for example to enhance open science practices. The tutorial is intended to take approximately 4 hours to complete.
+This **self-paced tutorial** will introduce you to the generation and evaluation of synthetic data. Synthetic data is generated data that can be used as an alternative to privacy-sensitive data, for example to enhance open science practices. The tutorial is intended to take approximately 2-3 hours to complete.
 
 The tutorial is split into the following sections:
 
@@ -27,5 +27,16 @@ Also, the tutorial requires the following `R` packages:
 - [`synthpop`](https://synthpop.org.uk/get-started.html)
 - [`densityratio`](https://thomvolker.github.io/densityratio)
 - [`mvtnorm`](https://mvtnorm.r-forge.r-project.org/)
+
+Before starting, please install the required packages as follows.
+
+```{r}
+#| label: install-packages
+#| eval: false
+
+install.packages("synthpop")
+install.packages("densityratio")
+install.packages("mvtnorm")
+```
 
 :::
