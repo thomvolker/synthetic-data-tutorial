@@ -5,7 +5,25 @@ bibliography: ../references.bib
 
 Now that we understand the concept of synthetic data and know about the dangers and potential, it is time to actually generate synthetic data in `R`. 
 Throughout, we will use the `synthpop` package [@synthpop], which is a powerful tool explicitly designed to generate synthetic data.
-Other alternatives to create synthetic data are, for example, the `R`-package `mice` [@mice; @volker_anonymiced_2021] or the stand-alone software IVEware [@iveware].
+Other alternatives to create synthetic data are, for example, the `R`-package `mice` [@mice; @volker_anonymiced_2021] or the stand-alone software `IVEware` [@iveware].
+Additionally, we will use the additional package `densityratio` [@densityratio] to evaluate the utility of synthetic data.
+
+Make sure to load all of the required packages, and in case you haven't installed them already, install them first, using `install.packages("package_name")`.
+
+---
+
+__1. Load the `R`-packages `synthpop` and `densityratio` using `library()`.__
+
+```{r}
+#| label: load-packages
+#| code-fold: true
+#| code-summary: "Show code: Loading required packages"
+#| message: false
+#| warning: false
+
+library(synthpop)
+library(densityratio)
+```
 
 ---
 
@@ -40,40 +58,6 @@ The `boys` data contains measurements on `r ncol(mice::boys)` variables on `r nr
 
 
 :::
-
----
-
-# Loading the required packages
-
----
-
-In this workshop, you will use the packages `synthpop` [@synthpop] and `densityratio` [@densityratio].
-Make sure to load all of the required packages, and in case you haven't installed them already, install them first, using `install.packages("package_name")`.
-
----
-
-__1. Install the `R`-packages `synthpop` and `densityratio` from `CRAN`, and load these packages using `library()`.__
-
-```{r}
-#| label: install-packages
-#| code-fold: true
-#| code-summary: "Show code: Installing required packages"
-#| eval: false
-
-install.packages("synthpop")
-install.packages("densityratio")
-```
-
-```{r}
-#| label: load-packages
-#| code-fold: true
-#| code-summary: "Show code: Loading required packages"
-#| message: false
-#| warning: false
-
-library(synthpop)
-library(densityratio)
-```
 
 ---
 
@@ -123,15 +107,99 @@ Finally, the data consists of a mix of continuous and categorical variables, whi
 
 --- 
 
-# Creating synthetic data
+# Creating synthetic data {#sec-creating}
 
 ---
 
-We will continue creating synthetic data with a relatively simple, parametric, synthesis model. 
-To this end, we need to decide on a parametric model to synthesize each variable. 
-Using `synthpop`, this is a piece of cake, as it allows to specify `method = "parametric"`, which selects a parametric model that matches the variable type of the variable at hand. 
-This implies that continuous variables are synthesized using a linear model that preserves the marginal distribution even in the case of non-normality using a nifty transformation of the data.
-Categorical variables with two categories are synthesized with a logistic regression model and categorical variables with more than two categories are synthesized using ordered or unordered polytomous regression, depending on whether the categories are ordered or not, respectively.
+Throughout the tutorial, we create data using fully conditional specification, which is implemented in the `synthpop` package. 
+The most important function in the package is `syn()`.
+The `syn()` function takes a dataset, estimates a set of conditional models, and draws synthetic data from these models.
+The other arguments allow to specify various modelling choices, for example which model to use for which variable, which set of predictor variables to use for modelling each synthetic variable, whether there are particular constraints that need to be taken into account, and so on.
+
+::: {.callout-tip title = "Modelling choices in synthpop"}
+
+Some of the most important arguments of the `syn()` function are the following (you can use `?synthpop::syn()` for a more exaustive list). The `syn()` function will take these modelling choices into account when modelling each synthetic variable, and the resulting synthetic data, called `syn` in the output list, adheres to these specifications. 
+
+### `method`
+
+Either a single character string with a synthesis model that is applied to all variables, or a character vector with a synthesis model per variable. The default method is use classification and regression trees [for an introduction, see, for instance, Section 8.1 in @islr] for all variables, which is a flexible, non-parametric technique for modelling synthetic data. Other synthesis models that are available are listed below (for a more thorough explanation, see `?synthpop::syn.METHOD`, with `METHOD` replaced by the actual method as specified below).
+
+__Methods for continuous variables__
+
+* `bag`: bagging.
+* `cart`: classification and regression trees.
+* `norm`: linear regression.
+* `sqrtnorm`: linear regression on the square root of the outcome variable.
+* `cubertnorm`: linear regression on the cubic root of the outcome variable.
+* `lognorm`: linear regression on the natural logarithm of the outcome.variable.
+* `normrank`: linear regression on normal quantiles of the ranks of the outcome, new values are drawn by matching synthetic ranks with observed ranks, and drawing synthetic values corresponding to the observed ranks.
+* `pmm`: predictive mean matching.
+* `ranger`: random forests using the `ranger` package.
+* `rf`: random forests using the `randomForest` package.
+* `sample`: random sampling with replacement from the observed data.
+
+__Methods for categorical data__
+
+* `satcat`: Generates a variable from all possible combination of its predictors using sampling (so only combinations with observed values can be synthesized). 
+* `catall`: Extends `satcat`, by drawing generating all categorical variables simultaneously from a multinomial distribution. This allows to generate synthetic values for combinations of cells that are not in the observed data, and to specify structural zeros (i.e., combinations of cells that are impossible). The multinomial model is actually a joint model for the categorical variables. The continuous variables can then be modelled using the fully conditional specification approach (this only works when first using joint modelling, and then modelling the remainder using fully conditional specification).
+* `ipf`: Iterative proportional fitting with additional noise to yield better privacy guarantees [satisfies differential privacy, for a non-technical introduction on this, see @Desfontaines_2023].
+* `logreg`: logistic regression.
+* `polr`: ordered polytomous regression (logistic regression with an outcome with $> 2$ categories).
+* `polyreg`: unordered polytomous regression.
+* `nested`: synthesizes a variable that is nested in the categories of another variable.
+* `cart` `pmm`, `ranger`, `rf` and `sample` are all also available for categorical variables.
+
+__Methods for survival data__
+
+* `survctree`: generates synthetic survival data using classification and regression trees.
+
+### `default.method`
+
+A string of length four with a user-specified default method for (1) continuous variables, (2) categorical variables with 2 levels, (3) ordered categorical variables with more than 2 levels, and (4) unordered categorical variables with more than 2 levels. Note that this `default.method` is only used when `method = "parametric"`, or when there is a mismatch between the synthesis method and the variable type.
+
+### `visit.sequence`
+
+Determines the order in which the variables are synthesized.
+While in theory this order is not supposed to matter much, in practice it can make a difference in some cases.
+@raabetal_guidelines_2017 state that if there exist a subset of variables which relationships are most important, it is often beneficial to synthesize these first. Variables with many categories are typically hard to synthesize, and may yield an unfeasible number of parameters for models of later synthesized variables, so you might consider synthesizing these at the final stages.
+
+### `predictor.matrix`
+
+You might want to exclude some variables as predictor for subsequent variables. This can be helpful if you know there are no relationships between some of the variables, or if you want to include an ID variable in the synthetic data, but not use this as a predictor of subsequent variables.
+
+### `k`
+
+The number of synthetic records that will be generated. You can generate more or less observations than in the observed data, but note that the information in the synthetic samples cannot exceed the information in the observed data.
+
+### `rules` and `rvalues`
+
+The `rules` argument expects a named list that contains rules for restricted values. These restricted values are determined by values of other variables: for example, monthly income should be zero for children who are too young to have a paid job (in the Netherlands, the age limit is 12 years). The `rvalues` argument expects a named list, but with the values to attach to those observations who adhere to the rules specified in `rules`.
+So, if you want to specify that every boy with genital tanner stage "G1" has pubic hair tanner stage "P1", you can set
+
+```
+rules = list(phb = "gen == 'G1'")
+rvalues = list(phb = 1)
+```
+
+### `semicont`
+
+Some variables might have a point mass for some values. For example, income variables often have a spike at 0 for people who don't have a paid job. This point mass can be modelled separately by first predicting whether an observation has either a zero or non-zero value, and subsequently modelling the income values for those observations with a non-zero value.
+
+### `smoothing`
+
+Some imputation methods for continuous variables sample the synthetic values from the observed variable. 
+Since re-using observed values may worsen privacy risks, smoothing can be applied such that there is additional randomness in the values that end up in the synthetic data. 
+The `smoothing` argument expects a character string with the smoothing method per variable.
+
+:::
+
+We will first create synthetic data with a relatively simple, parametric, synthesis model. 
+To this end, we need to decide on a parametric model to synthesize each variable, which can be done my specifying `method = "parametric"` in the call to `syn()`.
+This implies that continuous variables are synthesized using a linear model that preserves the marginal distribution even in the case of non-normality.
+Specifically, `normrank` first transforms the observed data to standard normal quantiles based on the relative ranks of the values. 
+Subsequently, a linear regression model is fitted on these quantiles using all predictors that were synthesized previously. 
+Finally, synthetic values are drawn from the observed data by backtransforming the synthetic quantiles to ranks, and matching the ranks with the observed data.
+Categorical variables with two categories are synthesized with a logistic regression model and categorical variables with more than two categories are synthesized using ordered or unordered polytomous regression (which is an extension to logistic regression for more than two categories), depending on whether the categories are ordered or not, respectively.
 
 ---
 
@@ -175,7 +243,7 @@ syn_param
 ```
 
 
-If all is well, all continuous variables are strictly positive, which is due to the transformation synthpop performs when modelling the continuous variables.
+If all is well, all continuous variables are strictly positive, which is due to matching the synthetic ranks with observed ranks and sampling the corresponding values from this (as explained above).
 However, there is a problem that you might have noticed.
 The variable `bmi` is not equal to `wgt / (hgt/100)^2`. 
 This issue can be fixed using _passive_ synthesis. 
@@ -243,9 +311,53 @@ The `bmi` values correspond to the synthetic `hgt` and `wgt` values, as we wante
 Using this approach, you can also specify different synthesis methods in general, for example to synthesize some of the variables with a random forest model, or to transform some of the variables before synthesizing them. 
 There are too many possibilities to cover in this practical, but the `synthpop` package contains extensive documentation on the possibilities (see, for instance, `?synthpop::syn` and `vignette("synthpop", "synthpop")`).
 
-The previous exercises showed that generating synthetic data can be quite easy. 
-However, depending on the data at hand, it can become more involved.
-For example, there might be a hierarchical structure in the data that you want to preserve, for example because observations are nested within groups, or because the data is longitudinal [to read more about this in the context of imputation for missing data, see @yucel_sequential_2017; @speidel_hmi_2020].
-Modelling such instances might require specialized software, but by using fully conditional specification, one can stitch multiple models together, one variable at a time, to model the joint distribution of the data.
-However, in many use-cases, such advanced modelling is not required, and tuning some synthesis models might already be sufficient.
+
+# Advanced: Extensions to `synthpop`
+
+Synthpop comes with an extensive suite of functionality for generating synthetic data, that already allow for a wide range of applications. 
+It can, however, occur that you want models that are not yet incorporated. 
+In `synthpop`, it is possible to write custom synthesis functions that extend the existing suite of methods. 
+Leaving the nitty-gritty aside, we can write a synthesis function that starts with `syn.` and then some name, that takes arguments `y` (the observed variable to be synthesized), `x` (the predictors in the observed data), `xp` (the previously synthesized predictor variables) and additional parameters for the model at hand (in our case, there aren't any). 
+Then, we need to fit the model on the observed data, `x` and `y`, and from this model draw new observations from the synthetic predictors, `xp`.
+This is illustrated below with a regression model, where all synthetic values lie exactly on the regression line (this is a very stupid idea, but it allows to display the procedure in a straightforward manner).
+The output of the synthetic data function should be a list with arguments `res`, the synthetic data values, and `fit`, the parameters of the fitted model.
+Note here that you don't accidentally leak the observed data!
+
+
+```{r}
+syn.synthesis_function <- function(y, x, xp, ...) {
+    new_y <- as.matrix(y)             # variable to be synthesized
+    new_x <- as.matrix(x)             # observed predictor variables
+    new_xp <- cbind(1, as.matrix(xp)) # previously synthesized variables
+    fit <- lm(new_y~new_x)            # fitted model
+    return(
+        list(
+            res = new_xp %*% coef(fit), # synthetic values
+            fit = coef(fit)
+        )
+    )
+}
+
+method["hgt"] <- "synthesis_function"
+
+syn_method_spec <- syn(
+    data = data,
+    method = method,
+    seed = 123,
+    print = FALSE
+)$syn
+
+plot(syn_method_spec$age, syn_method_spec$hgt)
+```
+
+Using this procedure, you can combine modelling functions that are self-written or stem from alternative packages with the synthesis procedure in `synthpop`.
+This also allows to model, for example, a hierarchical structure, using the `R`-package `lme4` [@lme4], `glmmTMB` [@glmmTMB] or, if you prefer a Bayesian procedure, with `brms` [@brms].
+In such instances, one can incorporate the hierarchical structure replacing the single level models with their hierarchical counterparts from these packages.
+Since no one has done this for synthetic data yet, relevant resources do not seem to exist, but feel free to reach out if you plan on doing this.
+To read more about modelling hierarchical data in the context of imputation for missing data, see @yucel_sequential_2017; @speidel_hmi_2020].
+
+# Conclusion
+
+The exercises here showed that `synthpop` allows quite some flexibility when modelling synthetic data, and simplifies the process substantially.
+However, further refinements might sometimes be possible.
 In the [subsequent section](../evaluation/), we will discuss how to evaluate the quality of the synthetic data at hand, from both a privacy and utility perspective.

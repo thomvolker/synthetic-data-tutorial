@@ -1,35 +1,20 @@
 ---
 title: "Evaluating privacy and utility of synthetic data"
 bibliography: ../references.bib
+page-navigation: true
 ---
 
----
+::: {.callout-important title="Code so far"}
 
-__Note.__ This section builds on the [previous section](../generation/), and assumes you have completed all exercises.
-
----
-
-# Synthetic data utility
-
----
-
-The quality of synthetic data can be evaluated on multiple levels and in different ways.
-Often, three types of utility measures are distinguished [@drechsler_30years_2024]:
-
-1. _Fit-for-purpose measures_ are typically the first step in evaluating synthetic data utility, and evaluates for example whether variable types are consistent with the observed data and whether constraints in the observed data are reproduced in the synthetic data (i.e., non-negative quantities, deterministic relationships like between `hgt`, `wgt` and `bmi`).
-2. _Global utility measures_ compare the observed and synthetic data on the level of the entire (multivariate) distribution. In theory, if the observed and synthetic data are drawn from the same distribution, any analysis performed on the synthetic data should yield results that are close to results obtained from the observed data. However, in practice, such global measures can be too broad, and high global utility does not guarantee that results of specific analyses are similar between observed and synthetic data.
-3. _Outcome-specific utility measures_ evaluate utility for a specific analysis. In the context of synthetic data for open science, it would be helpful if results from the observed data can be approximated closely in the synthetic data. Note that specific utility really focuses on a set of analyses, but does not need to transfer to different analyses.
-
-In isolution, none of these measures typically provide an all-encompassing qualification of utility, also because utility is use-case dependent.
-In many instances, the synthetic data modeller does not know what the data will be used for.
-In these settings, _outcome-specific utility measures_ are only of limited help, and global utility measures might provide the broadest picture of the utility of the synthetic data.
-However, for open science purposes, one could argue that fit-for-purpose measures and outcome-specific utility measures are most important, because in many instances, a data user would want to reproduce the original analyses. 
-Note, however, that even if outcome-specific utility is low, ultimately, the synthetic data can be very useful still, as it at least allows to run the original analysis code, and evaluate whether it contains any errors.
-In what follows, we briefly discuss all three types of measures.
+This section builds on the [previous section](../generation/), and assumes you have completed all exercises. 
+You will need the following output.
 
 ```{r}
 #| label: rerun-analyses
-#| include: false
+#| results: false
+#| message: false
+#| warning: false
+
 
 data <- readRDS(
     url("https://github.com/lmu-osc/synthetic-data-tutorial/raw/refs/heads/main/data/boys.RDS")
@@ -55,6 +40,26 @@ syn_passive <- syn(
     print = FALSE
 )
 ```
+
+:::
+
+# Synthetic data utility
+
+---
+
+The quality of synthetic data can be evaluated on multiple levels and in different ways.
+Often, three types of utility measures are distinguished [@drechsler_30years_2024]:
+
+1. _Fit-for-purpose measures_ are typically the first step in evaluating synthetic data utility, and evaluates for example whether variable types are consistent with the observed data and whether constraints in the observed data are reproduced in the synthetic data (i.e., non-negative quantities, deterministic relationships like between `hgt`, `wgt` and `bmi`).
+2. _Global utility measures_ compare the observed and synthetic data on the level of the entire (multivariate) distribution. In theory, if the observed and synthetic data are drawn from the same distribution, any analysis performed on the synthetic data should yield results that are close to results obtained from the observed data. However, in practice, such global measures can be too broad, and high global utility does not guarantee that results of specific analyses are similar between observed and synthetic data.
+3. _Outcome-specific utility measures_ evaluate utility for a specific analysis. In the context of synthetic data for open science, it would be helpful if results from the observed data can be approximated closely in the synthetic data. Note that specific utility really focuses on a set of analyses, but does not need to transfer to different analyses.
+
+In isolation, none of these measures typically provide an all-encompassing qualification of utility, also because utility is use-case dependent.
+In many instances, the synthetic data modeller does not know what the data will be used for.
+In these settings, outcome-specific utility measures are only of limited help, and global utility measures might provide the broadest picture of the utility of the synthetic data.
+However, for open science purposes, one could argue that fit-for-purpose measures and outcome-specific utility measures are most important, because in many instances, a data user would want to reproduce the original analyses. 
+Note, however, that even if outcome-specific utility is low, ultimately, the synthetic data can be very useful still, as it at least allows to run the original analysis code, and evaluate whether it contains any errors.
+In what follows, we briefly discuss all three types of measures.
 
 ---
 
@@ -102,6 +107,8 @@ All descriptives are quite close, although the categorical variables seem to hav
 
 __2. Use `compare()` from the `synthpop` package to compare the distributions of the observed data with the `syn_passive` data, set the parameters `utility.stats = NULL` and `utility.for.plot = NULL`. What do you see?__
 
+_Note: We set `utility.stats = NULL` and `utiltiy.for.plot = NULL` because here we just focus on the visualiztions. We will use different utility statistics later on._
+
 ---
 
 ```{r}
@@ -135,7 +142,10 @@ compare(
 )
 ```
 
-Marginally, we see that the distributions of the variables are quite okay, but some improvements are possible. For example, for `wgt`, quite some values between 10 and 50 kilograms are observed in the real data, but barely any synthetic values fall in this range. Also, `bmi` values seem to be over or under estimated, which suggests that the relationship between `hgt` and `wgt` has not been modelled appropriately.
+Marginally, we see that the distributions of the variables are quite okay, but some improvements are possible. For example, for `wgt`, quite some values between 10 and 50 kilograms are observed in the real data, but barely any synthetic values fall in this range. 
+Also, `bmi` values seem to be over or under estimated. 
+In fact, `bmi` values below 10 are very problematic and highly unlikely.
+All in all, this suggests that the relationship between `hgt` and `wgt` has not been modelled appropriately.
 
 :::
 
@@ -182,19 +192,21 @@ plot(
 ```
 
 We see that the distributions of the synthetic data are much more noisy than the distributions of the observed data. 
-That is, the relationships between the continuous variables are not very well preserved in the synthetic data.
-That is, even do linear relationships between variables are more or less preserved, the non-linear relationships are not captured very well, leading to more noisy synthetic data.
+That is, even though linear relationships between variables are more or less preserved, the non-linear relationships are not captured very well, leading to more noisy synthetic data.
 
 :::
 
-Now we evaluated whether the synthetic data is fit-for-purpose, we must decide whether we agree with the current level of utility. 
-By now, you are probably tired of hearing that this depends on the use-case at hand. 
-For didactive purposes, we decide that we attempt to further improve the utility of the synthetic data.
-To improve the utility of the synthetic data, we use regression trees for the continuous variables (`"cart"`), which is a non-parametric method that is better able to capture non-linear relationships between variables.
+Now that we investigate fit-for-purpose utility, we must decide whether the synthetic data is of sufficient quality.
+By now, you probably suspect that this depends on the use-case at hand. 
+We decide that we attempt to further improve the utility of the synthetic data.
+
+# Further synthesis improvements
+
+To improve the utility of the synthetic data, we use regression trees for the continuous variables (the `"cart"` model in `synthpop`), which is a non-parametric method that is better able to capture non-linear relationships between variables.
 In short, `cart` repetitively splits the predictor space according to which predictor is best able to predict the outcome, leading to so-called _leaves_ in which subsets of the outcome with relatively similar values are collected [see, e.g., Section 8.1.1 in @islr].
 Synthetic data is then obtained by splitting the predictors of the synthetic cases according to the learned splits, after which values are sampled from the leaves.
-Because this approach recycles observed data, we add some smoothing, so that the observed values are not exactly reproduced in the synthetic data. 
-This improves the privacy-level of the synthetic data, as synthetic values are not taken directly from the observed values.
+Because this approach recycles observed data, we add some smoothing, so that the observed values are not exactly reproduced in the synthetic data.
+This smoothing is often essential from a privacy-perspective, because it makes sure that synthetic values are not exactly equal to the observed data values.
 
 ---
 
@@ -315,28 +327,31 @@ We will further explore this using global and outcome-specific utility measures.
 
 We evaluate global utility by comparing the distributions of the synthetic data sets with the distribution of the observed data.
 This is often done using one of two ways. 
-The first is to compare the two distributions using some discrepancy measure, like the Kullback-Leibler divergence.
-Another method is to train a classification model to distinguish between the observed and synthetic data, a method commonly called the propensity mean squared error [$pMSE$\; for more information about this method, see @snoke_utility_2018].
-The better this is possible, the lower the global utility.
-We discuss the former approach, as it performed better for evaluating synthetic data utility according to [@volker_density_2024].
+
+1. The first is to compare the two distributions using some discrepancy measure. The smaller the discrepancy is, the more the synthetic data looks like the observed data.
+2. Another method is to train a classification model to distinguish between the observed and synthetic data, a method commonly called the propensity mean squared error [$pMSE$\; for more information about this method, see @snoke_utility_2018]. The easier it is for the classifier to distinguish between the observed and synthetic data, the lower the global utility, because this implies that the observed and synthetic data are different on some aspects.
+
+We discuss the former approach, as it performed better for evaluating synthetic data utility according to @volker_density_2024.
 
 ---
 
 ## Divergence estimation through density ratio estimation
 
 One way to evaluate global utility is by comparing the distributions of the observed and synthetic data directly. 
-This can be done using density ratio estimation, which, like the name suggests, attempts to estimate the ratio of the densities of two groups of samples.
+This can be done using density ratio estimation, which, like the name suggests, attempts to estimate the ratio of the densities of two groups of samples (note that we mean the same thing with distribution and density, although some nuances exist).
 That is, we attempt to estimate
 $$
 r(X) = \frac{f_\text{obs}(X)}{f_\text{syn}(X)}.
 $$
 This can be done by estimating the distributions of $f_\text{obs}(X)$ and $f_\text{syn}(X)$, but estimating $r(X)$ directly typically yields better results.
 The `R`-package `densityratio` has been developed for this purpose [@densityratio].
-Based on the density ratio, we estimate the divergence between the two data sets, which is in-built functionality.
+Based on the density ratio, we can estimate various divergence measures between the two data sets, which is an in-built functionality.
 
 ---
 
-__7. Call `ulsif()` from the `densityratio` package with `numerator_data = data` and `denominator_data = syn_passive$syn` and once more with `denominator_data = syn_cart$syn`, and store the results.__
+__7. Compare the observed and synthetic data with the `ulsif()` function from the `densityratio` package. Do this for both synthetic data sets.__
+
+_Note: Set `numerator_data = data` and `denominator_data = syn_passive$syn` and `denominator_data = syn_cart$syn`._
 
 ---
 
@@ -349,7 +364,7 @@ r_passive <- ulsif(data, syn_passive$syn)
 r_cart <- ulsif(data, syn_cart$syn)
 ```
 
-The `ulsif()` function performs cross-validation to find the best hyperparameter settings to estimate the density ratio, so that typically no model specification on behalf of the user is required.
+The `ulsif()` function performs cross-validation to find the optimal model to estimate the density ratio, so that typically no model specification on behalf of the user is required.
 
 ---
 
