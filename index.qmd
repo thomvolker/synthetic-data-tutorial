@@ -13,9 +13,7 @@ Moreover, realistic synthetic can be used in teaching, or for starting with mode
 All in all, synthetic data makes open science practices easier and might spark collaborations with potential data users.
 
 
-The tutorial is intended to take approximately 2-3 hours to complete.
-
-The tutorial is split into the following sections:
+The tutorial is intended to take approximately 2-3 hours to complete, and is split into the following sections:
 
 1.  [Statistical Disclosure Control](sdc/) provides a very brief introduction to statistical disclosure control.
 2.  [Synthetic data: The general idea](synthetic/) conceptually introduces the idea of synthetic data and contains an optional section on coding your own simple synthesizer.
