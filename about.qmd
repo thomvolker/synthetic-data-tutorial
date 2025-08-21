@@ -1,6 +1,7 @@
 ---
 title: "Generating and evaluating synthetic data in `R`"
 date: 2025-19-08
+page-navigation: true
 citation:
   type: "webpage"
   title: "Generating and evaluating synthetic data in R"
