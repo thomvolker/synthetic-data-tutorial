@@ -17,15 +17,13 @@ website:
   repo-url: https://github.com/lmu-osc/synthetic-data-tutorial
   repo-actions: [edit, issue]
   back-to-top-navigation: true
-  page-navigation: true
   favicon: assets/LMU_OSC_favicon.jpg
   margin-header: |
     ![](/assets/LMU_OSC_logo.svg){width="175"}
-
-
   navbar:
     right:
       - about.qmd
+      - text: About
     left:
       - href: index.qmd
         text: Home
