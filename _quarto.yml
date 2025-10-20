@@ -1,7 +1,7 @@
 # Begin Project
 project:
   type: website
-  pre-render: wget -nc https://raw.githubusercontent.com/lmu-osc/branding-resources/refs/heads/main/lmu-osc-custom.scss --no-check-certificate
+  pre-render: curl -O -L --insecure https://raw.githubusercontent.com/lmu-osc/branding-resources/refs/heads/main/lmu-osc-custom.scss
   post-render: rm lmu-osc-custom.scss
 # End Project
 
@@ -44,13 +44,13 @@ website:
       - text: "Overview"
         href: index.qmd
       - text: "Statistical disclosure control"
-        href: sdc/
+        href: sdc/index.qmd
       - text: "Synthetic data: The general idea"
-        href: synthetic/
+        href: synthetic/index.qmd
       - text: "Generating synthetic data"
-        href: generation/
+        href: generation/index.qmd
       - text: "Evaluating synthetic data quality"
-        href: evaluation/
+        href: evaluation/index.qmd
 # End Website
 
 
