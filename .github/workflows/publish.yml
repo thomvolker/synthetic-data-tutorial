@@ -16,6 +16,27 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
+      - name: Install misc. system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install \
+            libcurl4-openssl-dev \
+            libfontconfig1-dev \
+            libssl-dev \
+            libxml2-dev \
+            libpng-dev \
+            libjpeg-dev \
+            libtiff-dev \
+            libcairo2-dev \
+            libxt-dev \
+            libfreetype6-dev \
+            libharfbuzz-dev \
+            libfribidi-dev \
+            zlib1g-dev \
+            libv8-dev \
+            libglpk-dev \
+            librsvg2-bin
+
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
 
