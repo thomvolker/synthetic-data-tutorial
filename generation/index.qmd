@@ -121,7 +121,7 @@ Some of the most important arguments of the `syn()` function are the following (
 
 ### `method`
 
-Either a single character string with a synthesis model that is applied to all variables, or a character vector with a synthesis model per variable. The default method is use classification and regression trees (`cart`) for all variables, which is a flexible, non-parametric technique for modelling synthetic data [for an introduction, see, for instance, Section 8.1 in @islr]. Other synthesis models that are available are listed below (for a more thorough explanation, see `?synthpop::syn.METHOD`, with `METHOD` replaced by the actual method as specified below).
+Either a single character string with a synthesis model that is applied to all variables, or a character vector with a synthesis model per variable. The default method is use classification and regression trees (`cart`) for all variables, which is a flexible, non-parametric technique for modelling synthetic data [for an introduction on classification and regression trees, see, for instance, Section 8.1 in @islr]. Other synthesis models that are available are listed below (for a more thorough explanation, see `?synthpop::syn.METHOD`, with `METHOD` replaced by the actual method as specified below).
 
 __Methods for continuous variables__
 
@@ -245,7 +245,7 @@ syn_param
 If all is well, all continuous variables are strictly positive, which is due to matching the synthetic ranks with observed ranks and sampling the corresponding values from this (as explained above).
 However, there is a problem that you might have noticed.
 The variable `bmi` is not equal to `wgt / (hgt/100)^2`. 
-This issue can be fixed using _passive_ synthesis which will be demonstrated in the next section 
+This issue can be fixed using _passive_ synthesis, which will be demonstrated in the next section 
 
 ---
 
