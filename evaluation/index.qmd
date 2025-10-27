@@ -351,7 +351,7 @@ Based on the density ratio, we can estimate various divergence measures between 
 
 __7. Compare the observed and synthetic data with the `ulsif()` function from the `densityratio` package. Do this for both synthetic data sets.__
 
-_Note: Set `numerator_data = data` and either `denominator_data = syn_passive$syn` or `denominator_data = syn_cart$syn`._
+_Note: Set `numerator_data = data` and `denominator_data = syn_passive$syn` first, and `denominator_data = syn_cart$syn` second._
 
 ---
 
@@ -594,7 +594,7 @@ Moreover, the confidence intervals of the observed data overlap substantially wi
 
 :::
 
-One tip for evaluating outcome-specific utility is that if you expect data users are solely interested in analyses in the class of general linear models (like $t$-tests, ANOVAs and linear regression models) with merely main effects, modelling the variance-covariance matrix and the means of the observed date sufficiently accurately is sufficient. 
+One tip for evaluating outcome-specific utility is that if you expect data users are solely interested in analyses in the class of general linear models (like $t$-tests, ANOVAs and linear regression models) with merely main effects, modelling the variance-covariance matrix and the means of the observed data sufficiently accurate is sufficient. 
 From these characteristics, all regression coefficients or mean differences can be calculated.
 
 ---
