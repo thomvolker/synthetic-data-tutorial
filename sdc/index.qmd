@@ -15,7 +15,7 @@ Using previously collected data, researchers may answer novel research questions
 In addition to these high-level applications, open data can also be used to evaluate the reproducibility of research projects or serve as realistic data in education.
 That is, open data is valuable for many applications, but simply releasing the data is often not an option.
 
-The first step in the process of releasing data is to anonymize it [TODO: see Data Anonymization tutorial]. 
+The first step in the process of releasing data is to anonymize it (see for instance our [Data Anonymization tutorial](https://lmu-osc.github.io/data-anonymization/)). 
 Anonymization requires that potentially identifying information is removed from the collected data.
 Examples of such identifying information are names, addresses, IP-addresses, that can often be removed without losing important information.
 However, after de-identifying the data, your data might still contain information that can lead to indirect identification of individuals, for example because the data can be linked to external data sources.
