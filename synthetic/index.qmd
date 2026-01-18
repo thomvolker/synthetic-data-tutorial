@@ -19,7 +19,7 @@ These newly drawn samples can then be released to the public, as a surrogate dat
 In what follows, we assume that there is a observed data set, $X$, consisting of $n$ observations measured on $p$ variables.
 Furthermore, we assume that these observations adhere to some structure that we can encode in the joint distribution of the variables, $f(X)$.
 If we would know this distribution, we could sample new observations from it directly, but we typically do not know this.
-However, we can estimate this joint distribution, leading to $\hat{f}(X)$, and sample new observations from this.
+However, we can estimate this joint distribution from a data set at hand, leading to $\hat{f}(X)$, and sample new observations from this.
 
 ---
 
@@ -29,12 +29,11 @@ However, we can estimate this joint distribution, leading to $\hat{f}(X)$, and s
 
 How to estimate this joint distribution is essentially a question of how to specify the synthetic data model.
 If our model approximates the true data generating process reasonably well, we can expect fairly high quality synthetic data. 
-To be a bit more precise, this means that both univariate and multivariate patterns of the observed data are preserved in the synthetic data: the univariate characteristics of the variables are thus preserved, but also relationships between variables are captured in the synthetic data. 
-Moreover, if we model $f(X)$ accurately and draw new samples from this model, our data should be protected sufficiently well, because many real-world processes are far from deterministic. 
-These random fluctuations typically provide sufficient uncertainty to prevent both identity and attribute disclosure.
+To be a bit more precise, this means that both univariate and multivariate patterns of the observed data are preserved in the synthetic data, such as the mean and variance for each variables and the covariances between variables.
+Moreover, if we model $f(X)$ accurately and draw new samples from this model, the introduced noise adds uncertainty that provides privacy protection.
 In what follows, we describe the two strategies that have emerged to estimate $\hat{f}(x)$ and draw samples from it.
 
-## Joint modelling
+## (A) Joint modelling
 
 One approach to modelling synthetic data, is by estimating the multivariate distribution of the data directly, and use this single joint model to draw values for all variables simultaneously. 
 We can, for example, model the distribution of the data using a normal approximation. 
@@ -42,12 +41,12 @@ That is, we estimate the means and covariances of the variables in the data, ass
 For many data sets, however, this normal approximation provides a poor fit.
 
 In the past decade, deep learning has become popular for the generation of synthetic data. 
-An advantage of these methods, in particular generative adversarial networks (GANs) and variational auto-encoders (VAEs), is that they do not assume a particular parametric distribution (like the normal approximation we just discussed). 
+An advantage of these methods, in particular generative adversarial networks (GANs) and variational auto-encoders (VAEs), is that they do not assume a particular parametric distribution (like the normal approximation). 
 Rather, these methods attempt to learn the distribution of the data, by transforming relatively simple input data in a way that resembles the observed data. 
 While these methods can achieve state-of-the-art performance, extensive tuning is often required to achieve this performance. 
 Moreover, tuning these models such that they produce realistic synthetic data is non-trivial and often performed in an ad hoc fashion, subsantially lowering user-friendliness. 
 
-## Fully conditional specification
+## (B) Fully conditional specification
 
 A second strategy is to break the joint distribution of the data into a series of conditional distributions, one for each variable (or a block of variables).
 That is, we can factor the joint distribution of the data into a series of conditionals
@@ -66,13 +65,14 @@ Note that, although in theory the order of synthesis should not matter much, in 
 We will come back to this issue and provide some concrete advice in [the next section](/generation/index.qmd#sec-creating).
 
 
-Fully conditional specification has two distinct advantages over joint modelling: 
+Fully conditional specification has two distinct advantages over joint modelling:
+
 1. It allows great flexibility, because a different model can be used for each variable. That is, this linear model can be combined with or replaced by non-linear (e.g., non-parametric) models that capture non-linear relationships (or non-normal error terms).
-2. Traditional model evaluation techniques, such as regression diagnostics and posterior predictive checks can be used directly (see [the relevant vignette from the `performance` package](https://easystats.github.io/performance/articles/check_model.html#posterior-predictive-checks) for a practical introduction), and potential improvements can be readily incorporated into the synthesis model.^[Note, however, that no tailor-made software exists that works together with existing synthetic data generation packages.]
+2. Traditional model evaluation techniques, such as regression diagnostics and posterior predictive checks can be used directly (see [the relevant vignette from the `performance` package](https://easystats.github.io/performance/articles/check_model.html#posterior-predictive-checks) for a practical introduction), and potential improvements can be readily incorporated into the synthesis model.^[Note, however, that until now (beginning of 2026) no tailor-made software exists that works together with existing synthetic data generation packages.]
 For example, if a model with a linear relationship between two variables yields a poor fit, a non-linear relationship can be easily incorporated in the synthesis model.
 
 
-In what follows, we focus on synthesis methods that employ this conditional modelling strategy (commonly called fully conditional specification or sequential regression).
+In what follows, we focus on synthesis methods that employ this *conditional modelling strategy* (also called "fully conditional specification" or "sequential regression").
 
 :::{.callout-tip title="Additional resources"}
 
@@ -91,11 +91,11 @@ If you are interested in any additional resources on __fully conditional specifi
 
 ---
 
-# Exercise: A simple synthetic data model
+# (Optional) Exercise: A simple synthetic data model
 
 ---
 
-_The following exercise is purely illustrational. In practice, we don't write our synthesis code from scratch, but we use dedicated `R` packages to generate synthetic data. However, this section describes how such packages work under the hood, and a basic understanding of this will be helpful for specifying and improving the synthesis models. The related code is not essential, but try to understand the general workflow. In the [next section](../generation/), we will use the `synthpop` package to achieve similar results._
+_The following exercise is purely illustrational. In practice, we don't write our synthesis code from scratch, but we use dedicated `R` packages to generate synthetic data. However, this section describes how such packages work under the hood, and a basic understanding of this will be helpful for specifying and improving the synthesis models. This exercise is not essential for proceeding the tutorial, but try to understand the general workflow. In the [next section](../generation/), we will use the `synthpop` package to achieve similar results._
 
 To get a flavour of the two modelling approaches, you will show that it is indeed possible to model a joint distribution as a series of conditionals. 
 For this exercise (and all exercises in subsequent sections), we will use the `boys` data from the `R`-package `mice`,^[I filled in the missing values through imputation, so we don't have to deal with these. However, this implies that we cannot use the `boys` data from the `mice`-package directly] and for the time being, we focus on the first three variables `age`, `hgt` and `wgt`. 
@@ -137,15 +137,15 @@ head(data) |>
 We start by applying the joint modelling strategy on the `boys` data. 
 For simplicity, we draw synthetic samples by approximating the multivariate distribution of `age`, `hgt` and `wgt` using a three-variate normal distribution, using the means of these variables and their variance-covariance matrix obtained from the observed data.
 To generate these synthetic samples, we use the `R`-package `mvtnorm` [@mvtnorm].
+Note that this normal model provides a relatively poor fit to the data (if it were correct, people would keep growing eternally). 
+In practice, we would thus choose a different model, and most synthetic data generation software (including the `synthpop` package that we will use subsequently) allows for this.
 
-## Applying joint modelling in practice
+## Joint modelling in practice
 
 __1. Load the `R`-package `mvtnorm` using the function `library()`.__
 
 ```{r}
 #| label: load-mvtnorm
-#| code-fold: true
-#| code-summary: "Show code: Loading `mvtnorm`"
 #| message: false
 #| warning: false
 
@@ -156,13 +156,16 @@ library(mvtnorm)
 
 __2. Store the means and variance covariance matrix of the just created subset of the `boys` data.__
 
+:::{.callout-tip title="Show solution" collapse=true}
+
 ```{r}
 #| label: store-params
-#| code-fold: true
 
 means <- colMeans(data_subset)
 varcov <- var(data_subset)
 ```
+
+:::
 
 ---
 
@@ -170,18 +173,23 @@ __3. Create your first synthetic data set by calling the function `rmvnorm()` fr
 
 _Note: You may set a seed here for reproducibility (below, `seed = 123` is used, but this is no better than any other seed)._
 
+:::{.callout-tip title="Show solution" collapse=true}
+
 ```{r}
 #| label: joint-normal-model
-#| code-fold: true
 
 set.seed(123)
 
-syn1 <- mvtnorm::rmvnorm(
-    n = nrow(data_subset),
-    mean = means,
-    sigma = varcov
+syn1 <- data.frame(
+    rmvnorm(
+        n = nrow(data_subset),
+        mean = means,
+        sigma = varcov
+    )
 )
 ```
+
+:::
 
 ---
 
@@ -194,25 +202,31 @@ To do this, we need the regression models `hgt ~ age` and `wgt ~ age + hgt` fitt
 
 __4. Regress `hgt` on `age` and `wgt` on `age` and `hgt`, and store the results.__
 
+:::{.callout-tip title="Show solution" collapse=true}
+
 ```{r}
 #| label: fit-conditional-regressions
-#| code-fold: true
 
 hgtage <- lm(hgt ~ age, data = data_subset)
 wgtagehgt <- lm(wgt ~ age + hgt, data = data_subset) 
 ```
 
+:::
+
 ---
 
 __5. Now store the mean of the variable `age` with corresponding standard deviation.__
 
+:::{.callout-tip title="Show solution" collapse=true}
+
 ```{r}
 #| label: store-params-age
-#| code-fold: true
 
 mean_age <- mean(data_subset$age)
 sd_age <- sd(data_subset$age)
 ```
+
+:::
 
 Now, we have everything in place to start the synthesis process. We first generate the variable `age`, then `hgt` and then `wgt`.
 
@@ -220,9 +234,11 @@ Now, we have everything in place to start the synthesis process. We first genera
 
 __6. Draw $n_{syn} = `r nrow(data_subset)`$ samples from a normal distribution with mean equal to `mean_age` and standard deviation equal to `sd_age`.__
 
+:::{.callout-tip title="Show solution" collapse=true}
+
+
 ```{r}
 #| label: generate-age-conditional
-#| code-fold: true
 
 nsyn <- nrow(data_subset)
 age_syn <- rnorm(
@@ -232,30 +248,33 @@ age_syn <- rnorm(
 )
 ```
 
+:::
+
 ---
 
 
 __7. Use the synthetic `age` values to predict an equal number of `hgt` values, and add normal noise based on the residual standard deviation of the model fitted on the observed data.__
 
+:::{.callout-tip title="Show solution" collapse=true}
+
 ```{r}
 #| label: synthesize-hgt-conditional
-#| code-fold: true
 
 hgt_coefs <- coef(hgtage)
 hgt_sd <- summary(hgtage)$sigma
 hgt_syn <- hgt_coefs[1] + hgt_coefs[2] * age_syn + rnorm(nsyn, 0, hgt_sd)
 ```
 
+:::
 
 ---
 
-## Comparing the results
-
 __8. Now, use the synthetic `age` and `hgt` values to predict an equal number of `wgt` values, and again add normal noise based on the residual standard deviation of the model fitted on the observed data.__
+
+:::{.callout-tip title="Show solution" collapse=true}
 
 ```{r}
 #| label: synthesize-wgt-conditional
-#| code-fold: true
 
 wgt_coefs <- coef(wgtagehgt)
 wgt_sd <- summary(wgtagehgt)$sigma
@@ -263,20 +282,27 @@ wgt_syn <- wgt_coefs[1] + wgt_coefs[2] * age_syn + wgt_coefs[3] * hgt_syn +
     rnorm(nsyn, 0, wgt_sd)
 ```
 
+:::
+
 ---
+
+## Comparing the results
+
 
 __9. Compare the means and variance-covariance matrices of the two synthetic data sets with the estimates from the observed data.__
 
 ---
 
+:::{.callout-tip title="Show solution" collapse=true}
+
 First, we calculate the means of the observed and synthetic variables.
+
+
 
 ```{r}
 #| label: compare-means
-#| code-fold: true
-#| output: false
 
-syn2 <- cbind(age_syn, hgt_syn, wgt_syn)
+syn2 <- data.frame(age = age_syn, hgt = hgt_syn, wgt = wgt_syn)
 
 data.frame(
     obs = means,
@@ -289,8 +315,6 @@ These are all reasonably close! We subsequently compare the variances.
 
 ```{r}
 #| label: compare-vars
-#| code-fold: true
-#| output: false
 
 varcov
 var(syn1)
@@ -299,14 +323,42 @@ var(syn2)
 
 Also the variance covariance matrices are very close, as we would expect. However, these are the parameters that we specified, so these should be reasonably close, because anything else suggests a coding error. We can go further comparing the distributions of the variables, but we save that exercise for later.
 
+<!-- Could we add an inference model here? I.e., as if somebody would run a regression on the synthetic data, and see if that resemlbes the original regression results. -->
+
+:::
+
+---
+
+__10. Fit a regression model with `wgt` as dependent variable, and `age` and `hgt` as predictors for the observed and two synthetic data sets. What do you see?__
+
+:::{.callout-tip title="Show solution" collapse=true}
+
+```{r}
+#| label: compare-regressions
+
+fit <- lm(wgt ~ age + hgt, data = data)
+
+fit_s1 <- lm(wgt ~ age + hgt, data = syn1)
+fit_s2 <- lm(wgt ~ age + hgt, data = syn2)
+
+summary(fit)
+summary(fit_s1)
+summary(fit_s2)
+```
+
+You see that the regression coefficients of both synthetic data regressions are very similar to those obtained in the real data, and are in fact within sampling error, in the sense that they are approximately one $SE$ away from the coefficients obtained on the real data.
+
+:::
+
 ---
 
 ## Conclusion: Fully conditional specification versus joint modelling
 
 Now you have a flavour of how the two modelling procedures allow to generate synthetic data. 
-While in this specific example, the outcomes were essentially the same, this is not generally the case.
-That is, the combination of three conditional normal models with solely main effects is equivalent to a tri-variate normal distribution, but using fully conditional specification you can specify any model that you deem appropriate, even if this does not give rise to a well-defined multivariate probability distribution. 
-As stated in @sec-modelling, we can model a subset of the variables, or the entire data set using non-parametric models, and a different model can be specified for each variable. 
+While in this specific example, the outcomes were the same, this is not generally the case.
+That is, when the joint model is a multivariate normal distribution, using separate linear regression models with normal residuals yield equivalent results. 
+However, using fully conditional specification you can specify any model that you deem appropriate, even if this does not give rise to a well-defined multivariate probability distribution. 
+As stated in the section [Modelling synthetic data](#sec-modelling), we can model a subset of the variables, or the entire data set using non-parametric models, and a different model can be specified for each variable. 
 Because of this flexibility, and it's presence in existing software, we will use the fully conditional specification strategy throughout.
 Before we get there, we discuss some additional considerations for generating synthetic data.
 
@@ -325,7 +377,7 @@ We could also miss some important relationships between variables.
 In such cases, the synthetic data might not look like the observed data, and some analyses performed on the synthetic data might yield results that are far from those one would obtain running the same analyses on the observed data.
 That is, the synthetic data has low utility.
 2. It can also be the case that the model fits the data a bit too good. 
-If the synthetic data model overfits, we risk that the observed data is reproduced when sampling from the synthetic data model, protecting privacy very poorly.
+If the synthetic data model overfits, we risk that the observed data is reproduced when sampling from the synthetic data model, protecting privacy very poorly. Moreover, overfitted models have a limited utility, as they typically fail to generalize to new data.
 
 You might notice that also here the privacy-utility trade-off plays a major role: a simpler synthesis model typically leaks less information, but might also fail to capture more complex characteristics of the observed data.
 
@@ -501,7 +553,7 @@ In conclusion, you want a synthesis model to be simple enough to leave sufficien
 This substantially reduces disclosure risks, because this uncertainty renders it much more unlikely that real observations are reproduced by the synthetic data model, or that there occurs a deterministic relationship between variables.
 Simultaneously, specifying the relationships between variables accurately yields higher utility, which allows data users to do more useful analyses with the synthetic data.
 Hence, you want to balance data privacy with data utility.
-
+How to balance privacy and utility will be the subject of the upcoming sections.
 
 ---
 
@@ -514,16 +566,31 @@ That is, one should consider the goals that should be attainable with the synthe
 From a utility perspective, this implies that researchers who intend to release synthetic data with their code, should consider what aims should be achievable with this data.
 Often, this depends on the analyses conducted with the real data. 
 
-> For instance, for reproducing a regression analysis, means and covariances should be reproduced with reasonable accuracy, but preserving higher order moments (like skewness or kurtosis) or complex relationships might not be necessary. In such cases, it may be sufficiant to have a synthesis model that focuses on these aspects, even though the synthetic data deviates from the observed data in important aspects.
+For instance, for reproducing a regression analysis, means and covariances should be reproduced with reasonable accuracy, but preserving higher order moments (like skewness or kurtosis) or complex relationships might not be necessary. In such cases, it may be sufficiant to have a synthesis model that focuses on these aspects, even though the synthetic data deviates from the observed data in important aspects.
 
 If the data ought to be used for novel research, including complex modelling, one should consider incorporating these complexities (such as higher-order moments or non-linearities) in the synthesis model.
 Typically, it is safe to assume that aspects of the data that are not modelled explicitly (e.g., interactions between variables, non-linear relationships, fat tails or even multi-level structure) will not appear in the synthetic data, although some exceptions are possible by choosing flexible synthesis models.
-Whatever procedure is followed to create the synthetic data, make sure to be transparent: researchers would love to know what your synthetic data set can and cannot be used for.
+Whatever procedure is followed to create the synthetic data, make sure to be transparent: researchers should know what your synthetic data set can and cannot be used for.
+Some advice on how to define what the synthetic data can be used for will be provided in the chapter [Publishing a synthetic data set](/publishing/).
 
 At the same time, synthetic data creators should evaluate potential disclosure risks. 
-These risks should be evaluated at two distinct moment: before creating synthetic data, one should decide what information must be protected, and after creating synthetic data, one should evaluate how well one actually protected that information.
-For example, some synthesis methods may simply reproduce original records. 
+These risks should be evaluated at two distinct moments: before creating synthetic data, one should decide what information must be protected, and after creating synthetic data, one should evaluate how well one actually protected that information.
+For example, some synthesis methods may simply reproduce original records, such as the model in @fig-privacy-utility-model displayed by the blue line.
 The privacy-utility trade-off hints at the idea that the more complex the synthesis model, the larger the risk of disclosure.
 As such, it is advisable to start with simple synthesis models, and add complexity only when necessary.
 Some measures of disclosure risk will be covered in the upcoming sections, but when in doubt, please consider Section 3.3 on Risk Assessment in the Handbook on Statistical Disclosure Control [@hundepool2024].
 
+
+
+::: {.callout-tip}
+
+## Summary
+
+* Synthetic data can help to protect privacy of respondents.
+* Synthetic data are fake observations generated from a model that can be disseminated instead of the original data. 
+* Joint modelling and fully conditional specification are two common strategies of generating synthetic data. 
+* For tabular data, fully conditional specification is typically preferable, as it allows for more flexibility and makes synthetic data model refinements easier. 
+* The privacy-utility trade-off guides the synthesis process: using only little information in the synthesis models often provides better privacy protection, but may render rather unrealistic synthetic data. The quality of synthetic data can typically be substantially improved with more complex models, but this increases privacy risks.
+* Synthesis models should be tailored to intended use.
+
+:::

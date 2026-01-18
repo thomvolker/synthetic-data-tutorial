@@ -1,13 +1,13 @@
 ---
 title: "About"
-date: 2025-19-08
+date: 2025-12-18
 page-navigation: true
 citation:
   type: "webpage"
   title: "Generating and evaluating synthetic data in R"
   container-title: "LMU Open Science Center"
   url: https://lmu-osc.github.io/synthetic-data-tutorial/
-  doi: "TODO: DOI HERE"
+  # doi: "TODO: DOI HERE"
 author:
   - name: Thom Benjamin Volker
     roles: [conceptualization, formal analysis, funding acquisition, investigation, methodology, project administration, software, resources, validation, visualization, writing - original draft, writing - editing & review]
@@ -30,7 +30,7 @@ google-scholar: true
 
 # Contributors
 
-This site was authored by Thom Volker, and edits/contributions were made by Malika Ihle. <!-- TODO: Expand contributing authors -->
+This site was authored by Thom Volker, and edits and contributions were made by Malika Ihle, Alberto Villagran, Felix Schönbrodt and Patrick Callahan.
 
 # Licenses
 
