@@ -542,6 +542,8 @@ Conversely, if the overlap is small (or even negative), the coefficients are rel
 
 ---
 
+__TODO: ADD MAIN EFFECTS ANALYSIS__
+
 __11. Fit a linear regression model with the above specification using `lm.synds()` for both synthetic data sets. Compare the results with the observed data using `compare.fit.synds()`.__
 
 ---
@@ -710,3 +712,6 @@ Remember that if you plan to release synthetic data for open science purposes, i
 When in doubt, choose the option that yields the smallest risk.
 Also, make clear that the synthetic data is not real data, and that new analyses should thus be conducted with caution. 
 Unless the synthesis model is correctly specified, new analyses are likely to give biased results, and results should thus not be overinterpreted.
+
+
+# ADD SUMMARY
