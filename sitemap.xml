@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://thomvolker.github.io/synthetic-data-tutorial/evaluation/index.html</loc>
-    <lastmod>2026-02-08T23:24:45.526Z</lastmod>
-  </url>
-  <url>
-    <loc>https://thomvolker.github.io/synthetic-data-tutorial/about.html</loc>
-    <lastmod>2026-02-08T23:24:45.523Z</lastmod>
-  </url>
-  <url>
-    <loc>https://thomvolker.github.io/synthetic-data-tutorial/index.html</loc>
-    <lastmod>2026-02-08T23:24:45.527Z</lastmod>
+    <loc>https://thomvolker.github.io/synthetic-data-tutorial/synthetic/index.html</loc>
+    <lastmod>2026-02-15T23:20:13.230Z</lastmod>
   </url>
   <url>
     <loc>https://thomvolker.github.io/synthetic-data-tutorial/sdc/index.html</loc>
-    <lastmod>2026-02-08T23:24:45.528Z</lastmod>
+    <lastmod>2026-02-15T23:20:13.230Z</lastmod>
   </url>
   <url>
-    <loc>https://thomvolker.github.io/synthetic-data-tutorial/generation/index.html</loc>
-    <lastmod>2026-02-08T23:24:45.526Z</lastmod>
-  </url>
-  <url>
-    <loc>https://thomvolker.github.io/synthetic-data-tutorial/publishing/index.html</loc>
-    <lastmod>2026-02-08T23:24:45.527Z</lastmod>
+    <loc>https://thomvolker.github.io/synthetic-data-tutorial/evaluation/index.html</loc>
+    <lastmod>2026-02-15T23:20:13.228Z</lastmod>
   </url>
   <url>
     <loc>https://thomvolker.github.io/synthetic-data-tutorial/LICENSE.html</loc>
-    <lastmod>2026-02-08T23:24:45.519Z</lastmod>
+    <lastmod>2026-02-15T23:20:13.220Z</lastmod>
   </url>
   <url>
-    <loc>https://thomvolker.github.io/synthetic-data-tutorial/synthetic/index.html</loc>
-    <lastmod>2026-02-08T23:24:45.529Z</lastmod>
+    <loc>https://thomvolker.github.io/synthetic-data-tutorial/index.html</loc>
+    <lastmod>2026-02-15T23:20:13.228Z</lastmod>
+  </url>
+  <url>
+    <loc>https://thomvolker.github.io/synthetic-data-tutorial/generation/index.html</loc>
+    <lastmod>2026-02-15T23:20:13.228Z</lastmod>
+  </url>
+  <url>
+    <loc>https://thomvolker.github.io/synthetic-data-tutorial/publishing/index.html</loc>
+    <lastmod>2026-02-15T23:20:13.228Z</lastmod>
+  </url>
+  <url>
+    <loc>https://thomvolker.github.io/synthetic-data-tutorial/about.html</loc>
+    <lastmod>2026-02-15T23:20:13.224Z</lastmod>
   </url>
   <url>
     <loc>https://thomvolker.github.io/synthetic-data-tutorial/LICENSE-CODE.html</loc>
-    <lastmod>2026-02-08T23:24:45.516Z</lastmod>
+    <lastmod>2026-02-15T23:20:13.217Z</lastmod>
   </url>
 </urlset>
