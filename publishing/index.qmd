@@ -10,7 +10,7 @@ _There are currently (beginning of 2026) no widely accepted guidelines on publis
 
 ## Safe dissemination
 
-When releasing synthetic datasets, privacy protection must be integrated directly into the data synthesis workflow. First, **the original data must be properly anonymized** ([see our other course on this topic]((https://lmu-osc.github.io/data-anonymization/))). 
+When releasing synthetic datasets, privacy protection must be integrated directly into the data synthesis workflow. First, **the original data must be properly anonymized** ([see our other course on this topic](https://lmu-osc.github.io/data-anonymization/)). 
 In addition, it is essential to **ensure that the synthetic data does not inadvertently reveal sensitive information**. A sensible starting point is to examine what information the synthesis models actually contain. 
 For complex, non-parametric models this may be difficult to determine, but for simpler parametric models it is often more transparent. For example, when synthetic data are generated using linear regression with normally distributed errors, the model is determined by regression coefficients derived from the means, variances, and covariances of the observed data. 
 If no single observation has an excessive influence on these parameters, the resulting estimates usually contain enough aggregation and variability to protect the privacy of individuals in the dataset.
