@@ -1,4 +1,4 @@
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18318779.svg)](https://doi.org/10.5281/zenodo.18318779)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18318778.svg)](https://doi.org/10.5281/zenodo.18318778)
 
 # Generating and evaluating synthetic data in `R`
 
