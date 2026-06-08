@@ -23,8 +23,8 @@ website:
     ![](/assets/LMU_OSC_logo.svg){width="175"}
   navbar:
     right:
-      - about.qmd
-      - text: About
+      - href: about.qmd
+        text: About
     left:
       - href: index.qmd
         text: Home
