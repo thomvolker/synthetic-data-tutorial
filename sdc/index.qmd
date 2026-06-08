@@ -1,5 +1,5 @@
 ---
-title: "Statistical disclosure control"
+title: "Statistical Disclosure Control"
 bibliography: ../references.bib
 page-navigation: true
 ---

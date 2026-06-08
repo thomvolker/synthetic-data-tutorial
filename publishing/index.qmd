@@ -1,5 +1,5 @@
 ---
-title: "Publishing and using synthetic data"
+title: "Publishing and Using Synthetic Data"
 bibliography: ../references.bib
 page-navigation: true
 ---

@@ -1,5 +1,5 @@
 ---
-title: "Evaluating privacy and utility of synthetic data"
+title: "Evaluating Privacy and Utility of Synthetic Data"
 bibliography: ../references.bib
 page-navigation: true
 ---

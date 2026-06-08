@@ -1,5 +1,5 @@
 ---
-title: "Synthetic data: The general idea"
+title: "Synthetic Data: The General Idea"
 bibliography: ../references.bib
 page-navigation: true
 ---

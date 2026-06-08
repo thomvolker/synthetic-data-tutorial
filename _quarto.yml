@@ -8,7 +8,7 @@ project:
 
 # Begin Website
 website:
-  title: "Generating and evaluating synthetic data in R"
+  title: "Generating and Evaluating Synthetic Data in R"
   page-footer:
     center: "© 2026 Thom Volker. Published by LMU Open Science Center. Licensed under CC BY-SA 4.0."
     border: false
