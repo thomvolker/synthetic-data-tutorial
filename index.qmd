@@ -17,7 +17,7 @@ The tutorial focuses on the generation of tabular synthetic data. This precludes
 
 1.  [Statistical Disclosure Control](sdc/) provides a very brief introduction to methods used to protect individuals’ private information, while keeping the released data useful for analysis.
 2.  [Synthetic data: The general idea](synthetic/) conceptually introduces the idea of synthetic data and contains an optional section on coding your own simple synthesizer.
-3.  [Generating synthetic data](geneneration/) introduces the idea of synthetic data and outlines how it can be generated in `R`.
+3.  [Generating synthetic data](generation/) introduces the idea of synthetic data and outlines how it can be generated in `R`.
 4.  [Evaluating synthetic data quality](evaluation/) addresses the privacy-utility trade-off, and discusses how the quality of synthetic data can be evaluated from both sides of this trade-off.
 5. [Publishing and using synthetic data](publishing/) discusses when and how to publish synthetic data safely.
 
