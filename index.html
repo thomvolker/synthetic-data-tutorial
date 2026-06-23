@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Welcome to the synthetic data tutorial! – Generating and evaluating synthetic data in R</title>
+<title>Welcome to the Synthetic Data Tutorial! – Generating and Evaluating Synthetic Data in R</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -108,6 +108,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 <!-- Matomo -->
 <script>
+if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
     var _paq = window._paq = window._paq || [];
     /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
     _paq.push(['trackPageView']);
@@ -119,6 +120,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
         g.async = true; g.src = u + 'matomo.js'; s.parentNode.insertBefore(g, s);
     })();
+}
 </script>
 <!-- End Matomo Code -->
   
@@ -135,7 +137,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Generating and evaluating synthetic data in R</span>
+    <span class="navbar-title">Generating and Evaluating Synthetic Data in R</span>
     </a>
   </div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
@@ -152,11 +154,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li class="nav-item">
     <a class="nav-link" href="./about.html"> 
 <span class="menu-text">About</span></a>
-  </li>  
-  <li class="nav-item">
-    <span class="nav-link">
-<span class="menu-text">About</span>
-    </span>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -262,7 +259,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Welcome to the synthetic data tutorial!</h1>
+<h1 class="title">Welcome to the Synthetic Data Tutorial!</h1>
 </div>
 
 
@@ -279,14 +276,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="tutorial-overview" class="level1">
-<h1>Tutorial Overview</h1>
+<section id="tutorial-overview" class="level2">
+<h2 class="anchored" data-anchor-id="tutorial-overview">Tutorial Overview</h2>
 <p>This <strong>self-paced tutorial</strong> will introduce you to the generation and evaluation of synthetic data. Synthetic data is generated data that can be used as an alternative to privacy-sensitive data, for example to enhance open science practices. Advantages of open (synthetic) data are numerous: other researchers can re-run analyses with data that is close to the actual data, which allows them to verify the main results. Additionally, open (synthetic) data allows researchers to perform exploratory analyses that may lead to novel hypotheses, and in quite some instances performing such analyses with synthetic data yields rather accurate results. Moreover, realistic synthetic data can be used in teaching, or for starting with model building when access to the real data is currently still prohibited. All in all, synthetic data makes open science practices easier and might spark collaborations with potential data users.</p>
 <p>The tutorial focuses on the generation of tabular synthetic data. This precludes the generation of text data or other high-dimensional data sources (fMRI, intensive longitudinal data, etc.). Some extensions to multilevel-data are discussed, but this is not the main goal of the materials. In total, the tutorial is intended to take approximately 2-3 hours to complete, and is split into the following sections:</p>
 <ol type="1">
 <li><a href="sdc/">Statistical Disclosure Control</a> provides a very brief introduction to methods used to protect individuals’ private information, while keeping the released data useful for analysis.</li>
 <li><a href="synthetic/">Synthetic data: The general idea</a> conceptually introduces the idea of synthetic data and contains an optional section on coding your own simple synthesizer.</li>
-<li><a href="geneneration/">Generating synthetic data</a> introduces the idea of synthetic data and outlines how it can be generated in <code>R</code>.</li>
+<li><a href="generation/">Generating synthetic data</a> introduces the idea of synthetic data and outlines how it can be generated in <code>R</code>.</li>
 <li><a href="evaluation/">Evaluating synthetic data quality</a> addresses the privacy-utility trade-off, and discusses how the quality of synthetic data can be evaluated from both sides of this trade-off.</li>
 <li><a href="publishing/">Publishing and using synthetic data</a> discusses when and how to publish synthetic data safely.</li>
 </ol>
@@ -741,7 +738,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       &nbsp;
     </div>   
     <div class="nav-footer-center">
-<p>Copyright, 2025 Open Science Center at LMU Munich</p>
+<p>© 2026 Thom Volker. Published by LMU Open Science Center. Licensed under CC BY-SA 4.0.</p>
 <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
