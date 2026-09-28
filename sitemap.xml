@@ -1,51 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://thomvolker.github.io/synthetic-data-tutorial/generation/index.html</loc>
-    <lastmod>2026-09-22T08:03:20.156Z</lastmod>
-  </url>
-  <url>
-    <loc>https://thomvolker.github.io/synthetic-data-tutorial/footer/privacy.html</loc>
-    <lastmod>2026-09-22T08:03:20.156Z</lastmod>
-  </url>
-  <url>
-    <loc>https://thomvolker.github.io/synthetic-data-tutorial/footer/imprint.html</loc>
-    <lastmod>2026-09-22T08:03:20.156Z</lastmod>
-  </url>
-  <url>
-    <loc>https://thomvolker.github.io/synthetic-data-tutorial/evaluation/index.html</loc>
-    <lastmod>2026-09-22T08:03:20.156Z</lastmod>
-  </url>
-  <url>
-    <loc>https://thomvolker.github.io/synthetic-data-tutorial/publishing/index.html</loc>
-    <lastmod>2026-09-22T08:03:20.156Z</lastmod>
-  </url>
-  <url>
-    <loc>https://thomvolker.github.io/synthetic-data-tutorial/index.html</loc>
-    <lastmod>2026-09-22T08:03:20.156Z</lastmod>
-  </url>
-  <url>
-    <loc>https://thomvolker.github.io/synthetic-data-tutorial/synthetic/index.html</loc>
-    <lastmod>2026-09-22T08:03:20.159Z</lastmod>
+    <loc>https://thomvolker.github.io/synthetic-data-tutorial/about.html</loc>
+    <lastmod>2026-09-28T01:24:15.866Z</lastmod>
   </url>
   <url>
     <loc>https://thomvolker.github.io/synthetic-data-tutorial/LICENSE-CODE.html</loc>
-    <lastmod>2026-09-22T08:03:20.153Z</lastmod>
-  </url>
-  <url>
-    <loc>https://thomvolker.github.io/synthetic-data-tutorial/about.html</loc>
-    <lastmod>2026-09-22T08:03:20.154Z</lastmod>
-  </url>
-  <url>
-    <loc>https://thomvolker.github.io/synthetic-data-tutorial/LICENSE.html</loc>
-    <lastmod>2026-09-22T08:03:20.153Z</lastmod>
+    <lastmod>2026-09-28T01:24:15.865Z</lastmod>
   </url>
   <url>
     <loc>https://thomvolker.github.io/synthetic-data-tutorial/footer/accessibilty.html</loc>
-    <lastmod>2026-09-22T08:03:20.156Z</lastmod>
+    <lastmod>2026-09-28T01:24:15.868Z</lastmod>
+  </url>
+  <url>
+    <loc>https://thomvolker.github.io/synthetic-data-tutorial/footer/imprint.html</loc>
+    <lastmod>2026-09-28T01:24:15.868Z</lastmod>
+  </url>
+  <url>
+    <loc>https://thomvolker.github.io/synthetic-data-tutorial/index.html</loc>
+    <lastmod>2026-09-28T01:24:15.868Z</lastmod>
+  </url>
+  <url>
+    <loc>https://thomvolker.github.io/synthetic-data-tutorial/publishing/index.html</loc>
+    <lastmod>2026-09-28T01:24:15.868Z</lastmod>
+  </url>
+  <url>
+    <loc>https://thomvolker.github.io/synthetic-data-tutorial/generation/index.html</loc>
+    <lastmod>2026-09-28T01:24:15.868Z</lastmod>
+  </url>
+  <url>
+    <loc>https://thomvolker.github.io/synthetic-data-tutorial/synthetic/index.html</loc>
+    <lastmod>2026-09-28T01:24:15.871Z</lastmod>
   </url>
   <url>
     <loc>https://thomvolker.github.io/synthetic-data-tutorial/sdc/index.html</loc>
-    <lastmod>2026-09-22T08:03:20.159Z</lastmod>
+    <lastmod>2026-09-28T01:24:15.871Z</lastmod>
+  </url>
+  <url>
+    <loc>https://thomvolker.github.io/synthetic-data-tutorial/footer/privacy.html</loc>
+    <lastmod>2026-09-28T01:24:15.868Z</lastmod>
+  </url>
+  <url>
+    <loc>https://thomvolker.github.io/synthetic-data-tutorial/LICENSE.html</loc>
+    <lastmod>2026-09-28T01:24:15.865Z</lastmod>
+  </url>
+  <url>
+    <loc>https://thomvolker.github.io/synthetic-data-tutorial/evaluation/index.html</loc>
+    <lastmod>2026-09-28T01:24:15.868Z</lastmod>
   </url>
 </urlset>
