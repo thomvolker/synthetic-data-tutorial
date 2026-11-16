@@ -848,7 +848,7 @@ Comparing percentages observed with synthetic</code></pre>
 r(X) = \frac{f_\text{obs}(X)}{f_\text{syn}(X)}.
 \]</span> This can be done by estimating the distributions of <span class="math inline">\(f_\text{obs}(X)\)</span> and <span class="math inline">\(f_\text{syn}(X)\)</span>, but estimating <span class="math inline">\(r(X)\)</span> directly typically yields better results. The <code>R</code>-package <code>densityratio</code> has been developed for this purpose <span class="citation" data-cites="densityratio">(<a href="#ref-densityratio" role="doc-biblioref"><span class="nocase">Volker, Gonzalez Poses, et al.</span> 2024</a>)</span>. Based on the density ratio, we can estimate various divergence measures between the two data sets, which is an in-built functionality.</p>
 <hr>
-<p><strong>7. Compare the observed and synthetic data with the <code><a href="https://rdrr.io/pkg/densityratio/man/ulsif.html">ulsif()</a></code> function from the <code>densityratio</code> package. Do this for both synthetic data sets.</strong></p>
+<p><strong>7. Compare the observed and synthetic data with the <code><a href="https://thomvolker.github.io/densityratio/reference/ulsif.html">ulsif()</a></code> function from the <code>densityratio</code> package. Do this for both synthetic data sets.</strong></p>
 <p><em>Note: Set <code>numerator_data = data</code> and <code>denominator_data = syn_passive$syn</code> first, and <code>denominator_data = syn_cart$syn</code> second.</em></p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
@@ -863,10 +863,10 @@ r(X) = \frac{f_\text{obs}(X)}{f_\text{syn}(X)}.
 <div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">r_passive</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/densityratio/man/ulsif.html">ulsif</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">syn_passive</span><span class="op">$</span><span class="va">syn</span><span class="op">)</span></span>
-<span><span class="va">r_cart</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/densityratio/man/ulsif.html">ulsif</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">syn_cart</span><span class="op">$</span><span class="va">syn</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">r_passive</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://thomvolker.github.io/densityratio/reference/ulsif.html">ulsif</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">syn_passive</span><span class="op">$</span><span class="va">syn</span><span class="op">)</span></span>
+<span><span class="va">r_cart</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://thomvolker.github.io/densityratio/reference/ulsif.html">ulsif</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">syn_cart</span><span class="op">$</span><span class="va">syn</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>The <code><a href="https://rdrr.io/pkg/densityratio/man/ulsif.html">ulsif()</a></code> function performs cross-validation to find the optimal model to estimate the density ratio, so that typically no model specification on behalf of the user is required.</p>
+<p>The <code><a href="https://thomvolker.github.io/densityratio/reference/ulsif.html">ulsif()</a></code> function performs cross-validation to find the optimal model to estimate the density ratio, so that typically no model specification on behalf of the user is required.</p>
 </div>
 </div>
 </div>
@@ -939,7 +939,7 @@ Kernel Information:
   Kernel type: Gaussian with L2 norm distances
   Number of kernels: 200
 
-Optimal sigma: 1.311229
+Optimal sigma: 1.31124
 Optimal lambda: 0.0379269
 Optimal kernel weights: num [1:201] 0.1069 -0.0237 0.2505 -0.1082 0.2522 ...
  
@@ -956,7 +956,7 @@ Kernel Information:
   Kernel type: Gaussian with L2 norm distances
   Number of kernels: 200
 
-Optimal sigma: 4.58913
+Optimal sigma: 4.589132
 Optimal lambda: 0.3359818
 Optimal kernel weights: num [1:201] 0.02799 0.00165 0.01181 0.01547 0.00911 ...
  
@@ -970,7 +970,7 @@ For a two-sample homogeneity test, use 'summary(x, test = TRUE)'.</code></pre>
 </div>
 <p>Finally, we can plot the estimated density ratios against the variables in the synthetic data, to see where the synthetic data does not fit the observed data.</p>
 <hr>
-<p><strong>10. Use <code><a href="https://rdrr.io/pkg/densityratio/man/plot_bivariate.html">plot_bivariate()</a></code> on the fitted density ratio models, and set <code>grid = TRUE</code> and <code>samples = "denominator"</code> to only display the synthetic data points.</strong></p>
+<p><strong>10. Use <code><a href="https://thomvolker.github.io/densityratio/reference/plot_bivariate.html">plot_bivariate()</a></code> on the fitted density ratio models, and set <code>grid = TRUE</code> and <code>samples = "denominator"</code> to only display the synthetic data points.</strong></p>
 <p><em>Hint:</em> Very dark blue values indicate that synthetic data points in those regions are rather scarce in the observed data, whereas dark red values indicate that in some regions, the synthetic data is underrepresented.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
@@ -985,7 +985,7 @@ For a two-sample homogeneity test, use 'summary(x, test = TRUE)'.</code></pre>
 <div id="callout-11" class="callout-11-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/densityratio/man/plot_bivariate.html">plot_bivariate</a></span><span class="op">(</span><span class="va">r_passive</span>, grid <span class="op">=</span> <span class="cn">TRUE</span>, samples <span class="op">=</span> <span class="st">"denominator"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://thomvolker.github.io/densityratio/reference/plot_bivariate.html">plot_bivariate</a></span><span class="op">(</span><span class="va">r_passive</span>, grid <span class="op">=</span> <span class="cn">TRUE</span>, samples <span class="op">=</span> <span class="st">"denominator"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Negative estimated density ratios for 76 observation(s) converted to
 0.01 before applying logarithmic transformation</code></pre>
@@ -996,7 +996,7 @@ For a two-sample homogeneity test, use 'summary(x, test = TRUE)'.</code></pre>
 </figure>
 </div>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/densityratio/man/plot_bivariate.html">plot_bivariate</a></span><span class="op">(</span><span class="va">r_cart</span>, grid <span class="op">=</span> <span class="cn">TRUE</span>, samples <span class="op">=</span> <span class="st">"denominator"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://thomvolker.github.io/densityratio/reference/plot_bivariate.html">plot_bivariate</a></span><span class="op">(</span><span class="va">r_cart</span>, grid <span class="op">=</span> <span class="cn">TRUE</span>, samples <span class="op">=</span> <span class="st">"denominator"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure"><p><img src="index_files/figure-html/plot-bivariate-dr-2.png" class="img-fluid figure-img" width="672"></p>
